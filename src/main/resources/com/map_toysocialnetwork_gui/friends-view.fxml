@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="512.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableView" layoutX="279.0" layoutY="96.0" prefHeight="274.0" prefWidth="308.0">
+         <columns>
+            <TableColumn fx:id="tableColumnNume" prefWidth="104.00006103515625" text="Last Name" />
+            <TableColumn fx:id="tableColumnPrenume" minWidth="5.20001220703125" prefWidth="99.99993896484375" text="First Name" />
+            <TableColumn fx:id="tableColumnDate" prefWidth="103.20001220703125" text="Data prieteniei" />
+         </columns>
+      </TableView>
+      <Button fx:id="viewFriendrequestsButton" layoutX="42.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleViewFriendrequestsButton" text="View friend requests" />
+      <Button layoutX="41.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleViewChat" prefHeight="25.0" prefWidth="124.0" text="View chat" />
+      <Label layoutX="404.0" layoutY="53.0" text="My friends:" />
+      <TextField fx:id="searchUserTextField" layoutX="42.0" layoutY="91.0" prefHeight="25.0" prefWidth="124.0" />
+      <Label layoutX="42.0" layoutY="53.0" text="Search for user:" />
+      <Button fx:id="addButton" layoutX="42.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleAddFriendButtonAction" prefHeight="25.0" prefWidth="124.0" text="Add friend" />
+      <Button fx:id="deleteButton" layoutX="41.0" layoutY="208.0" mnemonicParsing="false" onAction="#handleDeleteFriendButtonAction" prefHeight="25.0" prefWidth="124.0" text="Delete friend" />
+      <Button fx:id="logOutButton" layoutX="573.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleLogOutButton" text="Log out" />
+      <Button fx:id="refreshButton" layoutX="372.0" layoutY="413.0" mnemonicParsing="false" onAction="#handleRefreshButtonAction" prefHeight="25.0" prefWidth="124.0" text="Refresh" />
+      <Label fx:id="loggedUserLabel" layoutX="13.0" layoutY="11.0" text="User logat:" />
+   </children>
+</AnchorPane>
