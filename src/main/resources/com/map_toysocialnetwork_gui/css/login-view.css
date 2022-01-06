@@ -1,9 +1,23 @@
-#usernameTextField:focused {
-    -fx-background-color: #dae2f8;
-    -fx-text-fill: #40457B;
+#titleLabel {
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
 
-.text-field {
-    -fx-focus-color: -fx-control-inner-background ;
-    -fx-faint-focus-color: -fx-control-inner-background ;
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(rgb(68, 68, 68), #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#000000, rgb(68, 68, 68));
 }

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main extends Application {
 
@@ -45,17 +46,18 @@ public class Main extends Application {
     private void initView(Stage stage) throws IOException {
         LoginController currentController = new LoginController();
         currentController.setService(service);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
-        primaryStage.setScene(new Scene(root, 800, 600));
+        root.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/login-view.css")).toExternalForm());
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
     public static void changeSceneToLogin() throws IOException {
         LoginController currentController = new LoginController();
         currentController.setService(service);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("login-view.fxml"));
+        fxmlLoader = new FXMLLoader(Main.class.getResource("../resources/views/login-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
         primaryStage.getScene().setRoot(root);
