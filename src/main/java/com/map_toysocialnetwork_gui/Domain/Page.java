@@ -39,4 +39,24 @@ public class Page {
         receivedFriendRequests = new ArrayList<>(service.getAllFriendRequestsFor(user.getId()));
         conversations = new ArrayList<>(service.getAllConversationsFor(user));
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<FriendDTO> getFriends() {
+        return friends;
+    }
+
+    public List<FriendshipRequest> getSentFriendRequests() {
+        return sentFriendRequests;
+    }
+
+    public List<FriendshipRequest> getReceivedFriendRequests() {
+        return receivedFriendRequests;
+    }
+
+    public List<Conversation> getConversations() {
+        return conversations;
+    }
 }

@@ -117,10 +117,6 @@ public class FriendsController extends Controller {
         refreshFriendsModel();
     }
 
-    public void setService(Service service) {
-        this.service = service;
-    }
-
     public void setLoggedUsername(String loggedUsername) {
         this.loggedUsername = loggedUsername;
     }

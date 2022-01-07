@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <SplitPane dividerPositions="0.225752508361204" prefHeight="465.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="463.0" prefWidth="150.0">
@@ -23,10 +22,10 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Nume Prenume" />
-                  <Label text="Friends" GridPane.rowIndex="1" />
-                  <Label text="Friend requests" GridPane.rowIndex="2" />
-                  <Label text="Chat" GridPane.rowIndex="3" />
+                  <Label fx:id="userFullNameLabel" text="Nume Prenume" />
+                  <Label fx:id="friendsLabel" text="Friends" GridPane.rowIndex="1" />
+                  <Label fx:id="friendRequestsLabel" text="Friend requests" GridPane.rowIndex="2" />
+                  <Label fx:id="chatLabel" text="Chat" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

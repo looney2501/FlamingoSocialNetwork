@@ -102,6 +102,10 @@ public class Main extends Application {
         primaryStage.getScene().setRoot(root);
     }
 
+    public static void changeSceneToPageView(String username) {
+
+    }
+
     public static void main(String[] args) {
         launch();
     }
