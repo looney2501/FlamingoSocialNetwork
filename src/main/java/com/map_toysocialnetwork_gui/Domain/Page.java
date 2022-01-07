@@ -1,5 +1,6 @@
 package com.map_toysocialnetwork_gui.Domain;
 
+import com.map_toysocialnetwork_gui.Domain.DTO.Conversation;
 import com.map_toysocialnetwork_gui.Domain.DTO.FriendDTO;
 import com.map_toysocialnetwork_gui.Service.Service;
 
@@ -15,6 +16,7 @@ public class Page {
     private List<FriendDTO> friends;
     private List<FriendshipRequest> sentFriendRequests;
     private List<FriendshipRequest> receivedFriendRequests;
+    private List<Conversation> conversations;
     private Service service;
 
     /**
@@ -25,8 +27,16 @@ public class Page {
     public Page(String username, Service service) {
         this.service = service;
         this.user = service.findUser(username);
-        friends = new ArrayList<>(service.getFriendsOfUser(username));
-        sentFriendRequests = new ArrayList<>(service.getAllFriendRequestsFrom(username));
-        receivedFriendRequests = new ArrayList<>(service.getAllFriendRequestsFor(username));
+        refreshPage();
+    }
+
+    /**
+     * Reloads all data from database to page.
+     */
+    public void refreshPage() {
+        friends = new ArrayList<>(service.getFriendsOfUser(user.getId()));
+        sentFriendRequests = new ArrayList<>(service.getAllFriendRequestsFrom(user.getId()));
+        receivedFriendRequests = new ArrayList<>(service.getAllFriendRequestsFor(user.getId()));
+        conversations = new ArrayList<>(service.getAllConversationsFor(user));
     }
 }
