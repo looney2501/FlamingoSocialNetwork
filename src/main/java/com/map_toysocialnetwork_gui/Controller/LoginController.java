@@ -21,9 +21,7 @@ public class LoginController extends Controller{
             MessageAlert.showErrorMessage(null, "Nu exista niciun utilizator cu acest username!");
         }
         else {
-
-            Main.changeSceneToUserView(usernameTextField.getText());
-
+            Main.changeSceneToPageView(usernameTextField.getText());
         }
     }
 

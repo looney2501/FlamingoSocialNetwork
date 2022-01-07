@@ -48,7 +48,7 @@ public class Main extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
@@ -72,9 +72,9 @@ public class Main extends Application {
     }
 
     public static void changeSceneToFriendsrequestsView(String username) throws IOException {
-        FriendsRequestsController currentController = new FriendsRequestsController();
+        FriendRequestsController currentController = new FriendRequestsController();
         currentController.setService(service);
-        currentController.setLoggedUser(username);
+        currentController.setLoggedUsername(username);
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/friendrequest-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
@@ -102,8 +102,14 @@ public class Main extends Application {
         primaryStage.getScene().setRoot(root);
     }
 
-    public static void changeSceneToPageView(String username) {
-
+    public static void changeSceneToPageView(String username) throws IOException {
+        PageController currentController = new PageController();
+        currentController.setService(service);
+        currentController.setLoggedUsername(username);
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/page-view.fxml"));
+        fxmlLoader.setController(currentController);
+        Parent root = fxmlLoader.load();
+        primaryStage.setScene(new Scene(root));
     }
 
     public static void main(String[] args) {

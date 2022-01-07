@@ -13,7 +13,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 
-public class FriendsRequestsController extends Controller{
+public class FriendRequestsController extends Controller{
 
     ObservableList<FriendshipRequest> friendshipRequestsReceiversModel = FXCollections.observableArrayList();
     ObservableList<FriendshipRequest> friendshipRequestsSenderModel = FXCollections.observableArrayList();
@@ -108,7 +108,7 @@ public class FriendsRequestsController extends Controller{
         return loggedUser;
     }
 
-    public void setLoggedUser(String loggedUser) {
+    public void setLoggedUsername(String loggedUser) {
         this.loggedUser = loggedUser;
     }
 
