@@ -1,9 +1,11 @@
 package com.map_toysocialnetwork_gui.Controller;
 
 import com.map_toysocialnetwork_gui.Domain.DTO.FriendDTO;
+import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Main;
-import com.map_toysocialnetwork_gui.Service.Service;
 import com.map_toysocialnetwork_gui.Service.ServiceExceptions.ServiceException;
+import com.map_toysocialnetwork_gui.Utils.Observer.Observer;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,54 +13,35 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class FriendsController extends Controller {
+public class FriendsController extends Controller implements Observer {
 
-    ObservableList<FriendDTO> friendsModel = FXCollections.observableArrayList();
-    private String loggedUsername;
 
-    @FXML
-    Label loggedUserLabel;
-    @FXML
-    Button logOutButton;
-    @FXML
-    Button addFriend;
     @FXML
     TextField searchUserTextField;
     @FXML
-    Button deleteFriend;
+    TableColumn<FriendDTO, String> friendsTableColumnNume;
     @FXML
-    Button viewFriendrequestsButton;
+    TableColumn<FriendDTO, String> friendsTableColumnPrenume;
     @FXML
-    TableColumn<FriendDTO, String> tableColumnNume;
+    TableColumn<FriendDTO, String> friendsTableColumnDate;
     @FXML
-    TableColumn<FriendDTO, String> tableColumnPrenume;
+    TableColumn<FriendDTO, ImageView> friendsTableColumnDelete;
     @FXML
-    TableColumn<FriendDTO, String> tableColumnDate;
-    @FXML
-    TableView<FriendDTO> tableView;
-
-    @FXML
-    public void handleLogOutButton(ActionEvent actionEvent) throws IOException {
-        Main.changeSceneToLogin();
-    }
-
-    @FXML
-    public void handleViewFriendrequestsButton(ActionEvent actionEvent) throws IOException {
-        Main.changeSceneToFriendsrequestsView(loggedUsername);
-    }
-
-    @FXML
-    public void handleViewChat(ActionEvent actionEvent) throws IOException {
-        Main.changeSceneToChatView(loggedUsername);
-    }
+    TableView<FriendDTO> friendsTableView;
+    ObservableList<FriendDTO> friendsModel = FXCollections.observableArrayList();
+    private String loggedUsername;
+    private Page userPage;
 
     @FXML
     public void handleDeleteFriendButtonAction(){
-        FriendDTO selectedFriendDTO = tableView.getSelectionModel().getSelectedItem();
+        FriendDTO selectedFriendDTO = friendsTableView.getSelectionModel().getSelectedItem();
         if(selectedFriendDTO==null){
             MessageAlert.showErrorMessage(null,"Nu ati selectat niciun user!");
         }
@@ -86,35 +69,51 @@ public class FriendsController extends Controller {
     }
 
     @FXML
-    public void handleRefreshButtonAction(){
-        refreshFriendsModel();
+    public void handleCellMouseClickedAction() {
+        var selectionModel = friendsTableView.getSelectionModel();
+        var selectedCells = selectionModel.getSelectedCells();
+        var row = selectedCells.get(0).getRow();
+        var column = selectedCells.get(0).getTableColumn().getId();
+        if (Objects.equals(column, "friendsTableColumnDelete")) {
+            FriendDTO friendToBeDeletedDTO = selectionModel.getSelectedItem();
+            userPage.getFriends().remove(friendToBeDeletedDTO);
+            service.deleteFriend(loggedUsername,friendToBeDeletedDTO.getUser().getId());
+            refreshFriendsModel();
+        }
     }
 
     public void initialize() {
-        //tableColumnNume.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
-        tableColumnNume.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO,String>, ObservableValue<String>>() {
+        initializeFriendsTableView();
+        refreshFriendsModel();
+    }
+
+    private void initializeFriendsTableView() {
+        friendsTableColumnNume.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendDTO, String> param) {
                 return new SimpleStringProperty(param.getValue().getUser().getLastName());
             }
         });
-        //tableColumnPrenume.setCellValueFactory(new PropertyValueFactory<FriendDTO, String>("firstName"));
-        tableColumnPrenume.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO,String>, ObservableValue<String>>() {
+        friendsTableColumnPrenume.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendDTO, String> param) {
                 return new SimpleStringProperty(param.getValue().getUser().getFirstName());
             }
         });
-        tableColumnDate.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO, String>, ObservableValue<String>>() {
+        friendsTableColumnDate.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendDTO, String> param) {
                 return new SimpleStringProperty(param.getValue().getDate().toString());
             }
         });
-
-        loggedUserLabel.setText(" "+loggedUserLabel.getText()+" "+ loggedUsername);
-        tableView.setItems(friendsModel);
-        refreshFriendsModel();
+        friendsTableColumnDelete.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO, ImageView>, ObservableValue<ImageView>>() {
+            @Override
+            public ObservableValue<ImageView> call(TableColumn.CellDataFeatures<FriendDTO, ImageView> param) {
+                return new SimpleObjectProperty<ImageView>(new ImageView(String.valueOf(Main.class.getResource("images/rejected-icon.png"))));
+            }
+        });
+        friendsTableView.setItems(friendsModel);
+        friendsTableView.getSelectionModel().setCellSelectionEnabled(true);
     }
 
     public void setLoggedUsername(String loggedUsername) {
@@ -122,7 +121,16 @@ public class FriendsController extends Controller {
     }
 
     private void refreshFriendsModel(){
-        friendsModel.setAll(service.getFriendsOfUser(loggedUsername));
+        friendsModel.setAll(userPage.getFriends());
     }
 
+    public void setUserPage(Page userPage) {
+        this.userPage=userPage;
+        userPage.addObserver(this);
+    }
+
+    @Override
+    public void update() {
+        refreshFriendsModel();
+    }
 }

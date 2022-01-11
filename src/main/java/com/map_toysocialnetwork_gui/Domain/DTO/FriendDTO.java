@@ -4,6 +4,7 @@ import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Utils.Constants;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class FriendDTO {
     private User user;
@@ -34,5 +35,18 @@ public class FriendDTO {
         return "Friend:" +
                 user.getLastName() +
                 user.getFirstName() + date.format(Constants.DATE_FORMATTER);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FriendDTO friendDTO = (FriendDTO) o;
+        return Objects.equals(user, friendDTO.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user);
     }
 }
