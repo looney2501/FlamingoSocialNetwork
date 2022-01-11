@@ -520,7 +520,7 @@ public class Service {
      * @param toUsername - String representing the receiver of the friend request
      *                   The status of friend request will be set to "pending"
      */
-    public void sendFriendRequest(String fromUsername, String toUsername) throws ServiceException{
+    public FriendshipRequest sendFriendRequest(String fromUsername, String toUsername) throws ServiceException{
         if(fromUsername.equals(toUsername)) {
             throw new ServiceException("Nu puteti trimite o cerere voua insiva!");
         }
@@ -547,6 +547,7 @@ public class Service {
         friendshipRequest.setStatus("pending");
         friendshipRequest.setDate(LocalDate.now());
         friendshipRequestRepository.save(friendshipRequest);
+        return friendshipRequest;
     }
 
     /**
@@ -703,6 +704,10 @@ public class Service {
         return friendshipRequests.stream()
                 .filter(notNull.and(predicateSender.and(predicatePending)))
                 .toList();
+    }
+
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
 

@@ -15,10 +15,10 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="400.0">
          <children>
-            <TableView fx:id="friendsTableView" layoutX="56.0" layoutY="84.0" onMouseClicked="#handleCellMouseClickedAction" prefHeight="462.0" prefWidth="316.0">
+            <TableView fx:id="friendsTableView" layoutX="56.0" layoutY="84.0" onMouseClicked="#handleFriendsTableCellMouseClickedAction" prefHeight="462.0" prefWidth="316.0">
                <columns>
-                  <TableColumn fx:id="friendsTableColumnNume" prefWidth="72.80001831054688" text="Last Name" />
-                  <TableColumn fx:id="friendsTableColumnPrenume" minWidth="5.20001220703125" prefWidth="91.20004272460938" text="First Name" />
+                  <TableColumn fx:id="friendsTableColumnLastName" prefWidth="72.80001831054688" text="Last Name" />
+                  <TableColumn fx:id="friendsTableColumnFirstName" minWidth="5.20001220703125" prefWidth="91.20004272460938" text="First Name" />
                   <TableColumn fx:id="friendsTableColumnDate" prefWidth="93.5999755859375" text="Data prieteniei" />
                   <TableColumn fx:id="friendsTableColumnDelete" prefWidth="54.39999999999998" />
                </columns>
@@ -38,15 +38,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <TextField fx:id="searchUserTextField" GridPane.columnIndex="1" />
                   <Label text="Search for user" />
-                  <TextField GridPane.columnIndex="1" />
                </children>
             </GridPane>
-            <TableView layoutX="91.0" layoutY="149.0" prefHeight="398.0" prefWidth="218.0">
+            <TableView fx:id="searchedUsersTableView" layoutX="91.0" layoutY="149.0" onMouseClicked="#handleSearchedUserTableCellMouseClickedAction" prefHeight="398.0" prefWidth="218.0">
               <columns>
-                <TableColumn prefWidth="72.0" text="Last Name" />
-                <TableColumn prefWidth="91.0" text="First Name" />
-                  <TableColumn prefWidth="54.0" />
+                <TableColumn fx:id="searchedUsersTableColumnLastName" prefWidth="72.0" text="Last Name" />
+                <TableColumn fx:id="searchedUsersTableColumnFirstName" prefWidth="91.0" text="First Name" />
+                  <TableColumn fx:id="searchedUsersTableColumnAdd" prefWidth="54.0" />
               </columns>
             </TableView>
          </children>

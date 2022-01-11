@@ -19,6 +19,7 @@ public class Page implements Observable {
     private List<FriendshipRequest> sentFriendRequests;
     private List<FriendshipRequest> receivedFriendRequests;
     private List<Conversation> conversations;
+    private List<User> allUsers;
     private Service service;
     private List<Observer> observers;
 
@@ -42,6 +43,8 @@ public class Page implements Observable {
         sentFriendRequests = new ArrayList<>(service.getAllFriendRequestsFrom(user.getId()));
         receivedFriendRequests = new ArrayList<>(service.getAllFriendRequestsFor(user.getId()));
         conversations = new ArrayList<>(service.getAllConversationsFor(user));
+        allUsers = new ArrayList<>();
+        service.getAllUsers().forEach(allUsers::add);
     }
 
     public User getUser() {
@@ -62,6 +65,10 @@ public class Page implements Observable {
 
     public List<Conversation> getConversations() {
         return conversations;
+    }
+
+    public List<User> getAllUsers() {
+        return allUsers;
     }
 
     @Override
