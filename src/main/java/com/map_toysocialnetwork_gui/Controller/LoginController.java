@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
@@ -15,7 +17,14 @@ public class LoginController extends Controller{
     private TextField usernameTextField;
 
     @FXML
-    public void handleLoginButtonAction(ActionEvent actionEvent) throws IOException {
+    public void handleEnterPressed(KeyEvent event) throws IOException {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            handleLoginButtonAction();
+        }
+    }
+
+    @FXML
+    public void handleLoginButtonAction() throws IOException {
         String username = usernameTextField.getText();
         if (service.findUser(username) == null) {
             MessageAlert.showErrorMessage(null, "Nu exista niciun utilizator cu acest username!");
