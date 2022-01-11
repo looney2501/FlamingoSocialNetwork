@@ -38,7 +38,7 @@ public class FriendRequestsController extends Controller implements Observer {
     @FXML
     TableView<FriendshipRequest> outFrReqTableView;
     @FXML
-    TableColumn<FriendshipRequest, String> outFrReqTableColumnLastNamee;
+    TableColumn<FriendshipRequest, String> outFrReqTableColumnLastName;
     @FXML
     TableColumn<FriendshipRequest, String> outFrReqTableColumnFirstName;
     @FXML
@@ -81,6 +81,7 @@ public class FriendRequestsController extends Controller implements Observer {
 
     public void initialize(){
         initializeIncFrReqTableView();
+        initializeOutFrReqTableView();
     }
 
     public void setLoggedUsername(String loggedUser) {
@@ -123,57 +124,35 @@ public class FriendRequestsController extends Controller implements Observer {
         refreshIncomingFriendRequests();
     }
 
-//    @FXML
-//    public void handleAcceptFriendrequestButtonAction(){
-//        FriendshipRequest selectedFriendshiprequest = tableViewFrom.getSelectionModel().getSelectedItem();
-//        if(selectedFriendshiprequest==null){
-//            MessageAlert.showErrorMessage(null,"Nu ati selectat nicio cerere de prietenie!");
-//        }
-//        else{
-//            try {
-//                service.acceptFriendRequest(selectedFriendshiprequest.getUserSender().getId(), loggedUser);
-//                refreshFriendRequestsModel();
-//
-//            }
-//            catch (ServiceException exception){
-//                MessageAlert.showErrorMessage(null,exception.getMessage());
-//            }
-//        }
-//    }
-//
-//    @FXML
-//    public void handleRejectFriendrequestButtonAction(){
-//        FriendshipRequest selectedFriendshiprequest = tableViewFrom.getSelectionModel().getSelectedItem();
-//        if(selectedFriendshiprequest==null){
-//            MessageAlert.showErrorMessage(null,"Nu ati selectat nicio cerere de prietenie!");
-//        }
-//        else{
-//            try {
-//                service.rejectFriendRequest(selectedFriendshiprequest.getUserSender().getId(), loggedUser);
-//                refreshFriendRequestsModel();
-//            }
-//            catch (ServiceException exception){
-//                MessageAlert.showErrorMessage(null,exception.getMessage());
-//            }
-//        }
-//    }
-//
-//    @FXML
-//    private void handleCancelFriendrequestButtonAction(){
-//        FriendshipRequest selectedFriendshipRequest = tableViewSendTo.getSelectionModel().getSelectedItem();
-//        if(selectedFriendshipRequest==null){
-//            MessageAlert.showErrorMessage(null,"Nu ati selectat nicio cerere de prietenie");
-//        }
-//        else{
-//            try{
-//                service.cancelFriendshipRequest(loggedUser,selectedFriendshipRequest.getUserReceiver().getId());
-//                refreshFriendRequestsModel();
-//            }
-//            catch (ServiceException exception){
-//                MessageAlert.showErrorMessage(null, exception.getMessage());
-//            }
-//        }
-//    }
+    public void initializeOutFrReqTableView() {
+        outFrReqTableColumnLastName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendshipRequest, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendshipRequest, String> param) {
+                return new SimpleStringProperty(param.getValue().getUserReceiver().getLastName());
+            }
+        });
+        outFrReqTableColumnFirstName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendshipRequest, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendshipRequest, String> param) {
+                return new SimpleStringProperty(param.getValue().getUserReceiver().getFirstName());
+            }
+        });
+        outFrReqTableColumnDate.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendshipRequest, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendshipRequest, String> param) {
+                return new SimpleStringProperty(param.getValue().getDate().toString());
+            }
+        });
+        outFrReqTableColumnCancel.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendshipRequest, ImageView>, ObservableValue<ImageView>>() {
+            @Override
+            public ObservableValue<ImageView> call(TableColumn.CellDataFeatures<FriendshipRequest, ImageView> param) {
+                return new SimpleObjectProperty<ImageView>(new ImageView(String.valueOf(Main.class.getResource("images/remove-icon.png"))));
+            }
+        });
+        outFrReqTableView.setItems(friendshipRequestsSenderModel);
+        outFrReqTableView.getSelectionModel().setCellSelectionEnabled(true);
+        refreshOutgoingFriendRequests();
+    }
 
     private void refreshIncomingFriendRequests() {
         friendshipRequestsReceiversModel.setAll(userPage.getReceivedFriendRequests());
