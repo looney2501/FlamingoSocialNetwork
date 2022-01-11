@@ -10,7 +10,7 @@ import com.map_toysocialnetwork_gui.Domain.Message;
 import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Domain.Validators.ValidatorExceptions.ValidatorException;
-import com.map_toysocialnetwork_gui.GraphUtils.GraphTraversal;
+import com.map_toysocialnetwork_gui.Utils.GraphUtils.GraphTraversal;
 import com.map_toysocialnetwork_gui.Repository.Repository;
 import com.map_toysocialnetwork_gui.Repository.RepositoryExceptions.RepositoryException;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.MessageDBRepository;
