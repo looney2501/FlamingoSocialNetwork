@@ -76,7 +76,17 @@ public class FriendRequestsController extends Controller implements Observer {
 
     @FXML
     public void handleOutFrReqTableColumnClicked() {
-
+        var selectionModel = outFrReqTableView.getSelectionModel();
+        var selectedCells = selectionModel.getSelectedCells();
+        if (selectedCells.size() > 0) {
+            var column = selectedCells.get(0).getTableColumn().getId();
+            if (Objects.equals(column, "outFrReqTableColumnCancel")) {
+                FriendshipRequest friendshipRequest = selectionModel.getSelectedItem();
+                userPage.getSentFriendRequests().remove(friendshipRequest);
+                userPage.notifyObservers();
+                service.cancelFriendshipRequest(loggedUser, friendshipRequest.getUserReceiver().getId());
+            }
+        }
     }
 
     public void initialize(){
