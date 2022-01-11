@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,6 +34,13 @@ public class ChatController extends Controller implements Observer {
     private ObservableList<Conversation> conversationsModel = FXCollections.observableArrayList();
     private ObservableList<Message> chatModel = FXCollections.observableArrayList();
     private Page userPage;
+
+    @FXML
+    public void handleEnterPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            handleSendMessageAction();
+        }
+    }
 
     @FXML
     public void handleSendMessageAction() {
