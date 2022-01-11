@@ -1,6 +1,7 @@
 package com.map_toysocialnetwork_gui;
 
 import com.map_toysocialnetwork_gui.Controller.*;
+import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.FriendshipDBRepository;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.FriendshipRequestDBRepository;

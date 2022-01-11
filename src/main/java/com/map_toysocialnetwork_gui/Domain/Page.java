@@ -30,6 +30,7 @@ public class Page implements Observable {
     public Page(String username, Service service) {
         this.service = service;
         this.user = service.findUser(username);
+        observers = new ArrayList<>();
         refreshPage();
     }
 

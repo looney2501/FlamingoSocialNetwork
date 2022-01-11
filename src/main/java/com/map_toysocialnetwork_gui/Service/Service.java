@@ -449,9 +449,9 @@ public class Service {
         if (messageRepository.findOne(messageToBeRepliedID) == null) {
             throw new ServiceException("Message to be replied must not be null!");
         }
-        Message replyMessage = new Message(senderUser, receiverUsersList, messageText, dateTime, messageToBeReplied.getId());
+        Message replyMessage = new Message(senderUser, receiverUsersList, messageText, dateTime, messageToBeRepliedID);
         messageRepository.save(replyMessage);
-        return replyMessage;
+        return messageRepository.findReplyFor(messageToBeRepliedID);
     }
 
     /**

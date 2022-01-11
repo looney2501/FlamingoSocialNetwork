@@ -47,6 +47,7 @@ public class PageController extends Controller {
         ChatController chatController = new ChatController();
         chatController.setService(service);
         chatController.setLoggedUsername(loggedUsername);
+        chatController.setUserPage(loggedUserPage);
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/chat-view.fxml"));
         fxmlLoader.setController(chatController);
         Parent root = fxmlLoader.load();

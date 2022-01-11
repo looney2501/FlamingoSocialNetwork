@@ -3,8 +3,10 @@ package com.map_toysocialnetwork_gui.Controller;
 import com.map_toysocialnetwork_gui.Domain.DTO.Conversation;
 import com.map_toysocialnetwork_gui.Domain.Entity;
 import com.map_toysocialnetwork_gui.Domain.Message;
+import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Main;
+import com.map_toysocialnetwork_gui.Utils.Observer.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatController extends Controller {
+public class ChatController extends Controller implements Observer {
 
     @FXML
     private ListView<Conversation> listViewConversations;
@@ -26,21 +28,10 @@ public class ChatController extends Controller {
     private ListView<Message> listViewChat;
     @FXML
     private TextField messageTextField;
-    @FXML
-    private Label loggedUserLabel;
     private String loggedUsername;
     private ObservableList<Conversation> conversationsModel = FXCollections.observableArrayList();
     private ObservableList<Message> chatModel = FXCollections.observableArrayList();
-
-    @FXML
-    public void handleGoBackAction() throws IOException {
-        Main.changeSceneToUserView(loggedUsername);
-    }
-
-    @FXML
-    public void handleRefreshConversations() {
-        refreshConversations();
-    }
+    private Page userPage;
 
     @FXML
     public void handleSendMessageAction() {
@@ -55,6 +46,8 @@ public class ChatController extends Controller {
             receiversUsername.remove(loggedUsername);
             if (!messageText.equals("")) {
                 Message replyMessage = service.replyToMessage(loggedUsername, receiversUsername, messageText, LocalDateTime.now(), messageToBeReplied);
+                currentConversation.getAllMessages().add(replyMessage);
+                userPage.notifyObservers();
                 messageTextField.setText("");
                 listViewChat.getItems().add(replyMessage);
             }
@@ -76,7 +69,6 @@ public class ChatController extends Controller {
     }
 
     public void initialize() {
-        loggedUserLabel.setText(" "+loggedUserLabel.getText()+" "+loggedUsername);
         listViewConversations.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Conversation conversation, boolean empty) {
@@ -105,7 +97,17 @@ public class ChatController extends Controller {
         this.loggedUsername = loggedUsername;
     }
 
+    public void setUserPage(Page userPage) {
+        this.userPage=userPage;
+        userPage.addObserver(this);
+    }
+
     private void refreshConversations() {
-        conversationsModel.setAll(service.getAllConversationsFor(service.findUser(loggedUsername)));
+        conversationsModel.setAll(userPage.getConversations());
+    }
+
+    @Override
+    public void update() {
+        refreshConversations();;
     }
 }
