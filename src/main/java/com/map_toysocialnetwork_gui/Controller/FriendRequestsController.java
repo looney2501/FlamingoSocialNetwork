@@ -1,5 +1,6 @@
 package com.map_toysocialnetwork_gui.Controller;
 
+import com.map_toysocialnetwork_gui.Domain.DTO.FriendDTO;
 import com.map_toysocialnetwork_gui.Domain.FriendshipRequest;
 import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Main;
@@ -17,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class FriendRequestsController extends Controller implements Observer {
 
@@ -47,6 +50,34 @@ public class FriendRequestsController extends Controller implements Observer {
     private String loggedUser;
     private Page userPage;
 
+    @FXML
+    public void handleIncFrReqTableColumnClicked() {
+        var selectionModel = incFrReqTableView.getSelectionModel();
+        var selectedCells = selectionModel.getSelectedCells();
+        if (selectedCells.size() > 0) {
+            var column = selectedCells.get(0).getTableColumn().getId();
+            if (Objects.equals(column, "incFrReqTableColumnReject")) {
+                FriendshipRequest friendshipRequest = selectionModel.getSelectedItem();
+                userPage.getReceivedFriendRequests().remove(friendshipRequest);
+                userPage.notifyObservers();
+                service.rejectFriendRequest(friendshipRequest.getUserSender().getId(), loggedUser);
+            }
+            if (Objects.equals(column, "incFrReqTableColumnAccept")) {
+                FriendshipRequest friendshipRequest = selectionModel.getSelectedItem();
+                userPage.getReceivedFriendRequests().remove(friendshipRequest);
+                FriendDTO newFriend = new FriendDTO(friendshipRequest.getUserSender());
+                newFriend.setDate(LocalDate.now());
+                userPage.getFriends().add(newFriend);
+                userPage.notifyObservers();
+                service.acceptFriendRequest(friendshipRequest.getUserSender().getId(), loggedUser);
+            }
+        }
+    }
+
+    @FXML
+    public void handleOutFrReqTableColumnClicked() {
+
+    }
 
     public void initialize(){
         initializeIncFrReqTableView();

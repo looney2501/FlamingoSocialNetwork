@@ -11,13 +11,13 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="430.0">
          <children>
-            <TableView fx:id="incFrReqTableView" layoutX="40.0" layoutY="100.0" prefHeight="400.0" prefWidth="370.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+            <TableView fx:id="incFrReqTableView" layoutX="40.0" layoutY="100.0" onMouseClicked="#handleIncFrReqTableColumnClicked" prefHeight="400.0" prefWidth="363.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="100.0">
               <columns>
                   <TableColumn fx:id="incFrReqTableColumnLastName" prefWidth="99.19998168945312" text="Last Name" />
                 <TableColumn fx:id="incFrReqTableColumnFirstName" prefWidth="90.39996337890625" text="First Name" />
                   <TableColumn fx:id="incFrReqTableColumnDate" prefWidth="71.20001220703125" text="Date" />
                   <TableColumn fx:id="incFrReqTableColumnAccept" prefWidth="50.0" />
-                  <TableColumn fx:id="incFrReqTableColumnReject" prefWidth="50.0" />
+                  <TableColumn fx:id="incFrReqTableColumnReject" prefWidth="50.4000244140625" />
               </columns>
             </TableView>
             <Label layoutX="159.0" layoutY="52.0" text="Incoming friend requests" AnchorPane.topAnchor="50.0" />
@@ -25,7 +25,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="370.0">
          <children>
-            <TableView fx:id="outFrReqTableView" layoutX="11.0" layoutY="100.0" prefHeight="400.0" prefWidth="326.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="100.0">
+            <TableView fx:id="outFrReqTableView" layoutX="11.0" layoutY="100.0" onMouseClicked="#handleOutFrReqTableColumnClicked" prefHeight="400.0" prefWidth="320.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="100.0">
                <columns>
                   <TableColumn fx:id="outFrReqTableColumnLastName" prefWidth="88.79998779296875" text="Last Name" />
                   <TableColumn fx:id="outFrReqTableColumnFirstName" prefWidth="104.00000762939453" text="First Name" />
