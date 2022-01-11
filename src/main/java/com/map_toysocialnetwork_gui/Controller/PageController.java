@@ -37,6 +37,7 @@ public class PageController extends Controller {
         FriendRequestsController friendRequestsController = new FriendRequestsController();
         friendRequestsController.setService(service);
         friendRequestsController.setLoggedUsername(loggedUsername);
+        friendRequestsController.setUserPage(loggedUserPage);
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/friendrequest-view.fxml"));
         fxmlLoader.setController(friendRequestsController);
         Parent root = fxmlLoader.load();
