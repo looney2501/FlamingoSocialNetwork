@@ -44,12 +44,7 @@ public class Main extends Application {
     }
 
     private void initView(Stage stage) throws IOException {
-        LoginController currentController = new LoginController();
-        currentController.setService(service);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
-        fxmlLoader.setController(currentController);
-        Parent root = fxmlLoader.load();
-        primaryStage.setScene(new Scene(root));
+        changeSceneToLogin();
         primaryStage.show();
     }
 
@@ -59,7 +54,7 @@ public class Main extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
-        primaryStage.getScene().setRoot(root);
+        primaryStage.setScene(new Scene(root));
     }
 
     public static void changeSceneToUserView(String username) throws IOException {

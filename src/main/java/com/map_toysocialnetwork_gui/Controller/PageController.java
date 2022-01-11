@@ -54,6 +54,11 @@ public class PageController extends Controller {
         subsceneAnchorPane.getChildren().setAll(root);
     }
 
+    @FXML
+    public void handleLogOutButtonAction() throws IOException {
+        Main.changeSceneToLogin();
+    }
+
     public void initialize() {
         loggedUserPage = new Page(loggedUsername, service);
         userFullNameLabel.setText(loggedUserPage.getUser().getFirstName() + " " + loggedUserPage.getUser().getLastName());
