@@ -17,7 +17,7 @@ public class UserFactory implements Factory<User> {
 
     @Override
     public User createObject(String... attributes) {
-        User u = new User(attributes[1], attributes[2]);
+        User u = new User(attributes[1], attributes[2], attributes[3]);
         u.setId(attributes[0]);
         return u;
     }

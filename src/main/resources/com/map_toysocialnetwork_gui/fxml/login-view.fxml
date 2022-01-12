@@ -28,7 +28,7 @@
             <Button mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Log In" GridPane.rowIndex="3" />
             <TextField fx:id="usernameTextField" onKeyPressed="#handleEnterPressed" prefHeight="26.0" prefWidth="114.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" GridPane.rowIndex="2" />
-            <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="passwordTextField" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
