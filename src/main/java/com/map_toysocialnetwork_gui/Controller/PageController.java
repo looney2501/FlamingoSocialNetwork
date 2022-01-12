@@ -60,6 +60,8 @@ public class PageController extends Controller {
     public void handleReportsLabelClicked() throws IOException {
         ReportsController reportsController = new ReportsController();
         reportsController.setService(service);
+        reportsController.setLoggedUsername(loggedUsername);
+        reportsController.setUserPage(loggedUserPage);
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/reports-view.fxml"));
         fxmlLoader.setController(reportsController);
         Parent root = fxmlLoader.load();
