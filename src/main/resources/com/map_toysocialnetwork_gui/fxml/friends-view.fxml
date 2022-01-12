@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0">
+         <children>
+            <TableView fx:id="friendsTableView" layoutX="56.0" layoutY="84.0" onMouseClicked="#handleFriendsTableCellMouseClickedAction" prefHeight="462.0" prefWidth="316.0">
+               <columns>
+                  <TableColumn fx:id="friendsTableColumnLastName" prefWidth="72.80001831054688" text="Last Name" />
+                  <TableColumn fx:id="friendsTableColumnFirstName" minWidth="5.20001220703125" prefWidth="91.20004272460938" text="First Name" />
+                  <TableColumn fx:id="friendsTableColumnDate" prefWidth="93.5999755859375" text="Data prieteniei" />
+                  <TableColumn fx:id="friendsTableColumnDelete" prefWidth="54.39999999999998" />
+               </columns>
+            </TableView>
+            <HBox layoutX="314.3999938964844" />
+            <Label layoutX="185.0" layoutY="38.0" text="My friends" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="600.0" prefWidth="400.0">
+         <children>
+            <GridPane layoutX="100.0" layoutY="61.0" prefHeight="36.0" prefWidth="200.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="searchUserTextField" GridPane.columnIndex="1" />
+                  <Label text="Search for user" />
+               </children>
+            </GridPane>
+            <TableView fx:id="searchedUsersTableView" layoutX="91.0" layoutY="149.0" onMouseClicked="#handleSearchedUserTableCellMouseClickedAction" prefHeight="398.0" prefWidth="218.0">
+              <columns>
+                <TableColumn fx:id="searchedUsersTableColumnLastName" prefWidth="72.0" text="Last Name" />
+                <TableColumn fx:id="searchedUsersTableColumnFirstName" prefWidth="91.0" text="First Name" />
+                  <TableColumn fx:id="searchedUsersTableColumnAdd" prefWidth="54.0" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

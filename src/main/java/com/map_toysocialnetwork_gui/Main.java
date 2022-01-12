@@ -1,6 +1,7 @@
 package com.map_toysocialnetwork_gui;
 
 import com.map_toysocialnetwork_gui.Controller.*;
+import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.FriendshipDBRepository;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.FriendshipRequestDBRepository;
@@ -44,6 +45,11 @@ public class Main extends Application {
     }
 
     private void initView(Stage stage) throws IOException {
+        changeSceneToLogin();
+        primaryStage.show();
+    }
+
+    public static void changeSceneToLogin() throws IOException {
         LoginController currentController = new LoginController();
         currentController.setService(service);
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
@@ -51,33 +57,13 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         root.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/login-view.css")).toExternalForm());
         primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-    }
-
-    public static void changeSceneToLogin() throws IOException {
-        LoginController currentController = new LoginController();
-        currentController.setService(service);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("../resources/views/login-view.fxml"));
-        fxmlLoader.setController(currentController);
-        Parent root = fxmlLoader.load();
-        primaryStage.getScene().setRoot(root);
-    }
-
-    public static void changeSceneToUserView(String username) throws IOException {
-        FriendsController currentController = new FriendsController();
-        currentController.setService(service);
-        currentController.setLoggedUsername(username);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("friends-view.fxml"));
-        fxmlLoader.setController(currentController);
-        Parent root = fxmlLoader.load();
-        primaryStage.getScene().setRoot(root);
     }
 
     public static void changeSceneToFriendsrequestsView(String username) throws IOException {
-        FriendsRequestsController currentController = new FriendsRequestsController();
+        FriendRequestsController currentController = new FriendRequestsController();
         currentController.setService(service);
-        currentController.setLoggedUser(username);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("friendrequest-view.fxml"));
+        currentController.setLoggedUsername(username);
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/friendrequest-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
         primaryStage.getScene().setRoot(root);
@@ -88,7 +74,7 @@ public class Main extends Application {
         ChatController currentController = new ChatController();
         currentController.setService(service);
         currentController.setLoggedUsername(username);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("chat-view.fxml"));
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/chat-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
         primaryStage.getScene().setRoot(root);
@@ -98,10 +84,20 @@ public class Main extends Application {
         SendNewMessageController currentController = new SendNewMessageController();
         currentController.setService(service);
         currentController.setLoggedUsername(username);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("send-new-message-view.fxml"));
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/send-new-message-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
         primaryStage.getScene().setRoot(root);
+    }
+
+    public static void changeSceneToPageView(String username) throws IOException {
+        PageController currentController = new PageController();
+        currentController.setService(service);
+        currentController.setLoggedUsername(username);
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/page-view.fxml"));
+        fxmlLoader.setController(currentController);
+        Parent root = fxmlLoader.load();
+        primaryStage.setScene(new Scene(root));
     }
 
     public static void main(String[] args) {

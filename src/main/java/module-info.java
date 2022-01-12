@@ -6,6 +6,7 @@ module com.map_toysocialnetwork_gui {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires org.apache.pdfbox;
 
     opens com.map_toysocialnetwork_gui to javafx.fxml;
     opens com.map_toysocialnetwork_gui.Controller to javafx.fxml;

@@ -134,12 +134,11 @@ public class FriendshipRequestDBRepository implements Repository<FriendshipReque
                 Connection connection = DriverManager.getConnection(url,username,password);
                 PreparedStatement statement = connection.prepareStatement
                         (
-                        "update friendship_requests set status=? where username1=? and username2=? and status='pending' and date_friendship_request=?"
+                        "update friendship_requests set status=? where username1=? and username2=? and status='pending'"
                         );
                 statement.setString(1,entity.getStatus());
                 statement.setString(2,entity.getUserSender().getId());
                 statement.setString(3,entity.getUserReceiver().getId());
-                statement.setDate(4,Date.valueOf(entity.getDate()));
                 statement.executeUpdate();
             }
             catch(SQLException e){

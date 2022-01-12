@@ -1,4 +1,4 @@
-package com.map_toysocialnetwork_gui.GraphUtils;
+package com.map_toysocialnetwork_gui.Utils.GraphUtils;
 
 import org.junit.jupiter.api.Test;
 

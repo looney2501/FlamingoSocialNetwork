@@ -43,13 +43,14 @@ public class UserDBRepository implements Repository<String, User> {
                 return null;
             }
             PreparedStatement statement2 = connection.prepareStatement
-                    ("select first_name, last_name from users where username=?");
+                    ("select first_name, last_name, password from users where username=?");
             statement2.setString(1,user_id);
             ResultSet resultSet2 = statement2.executeQuery();
             resultSet2.next();
             String first_name = resultSet2.getString("first_name");
             String last_name = resultSet2.getString("last_name");
-            User user = new User(first_name, last_name);
+            String userPassword = resultSet2.getString("password");
+            User user = new User(first_name, last_name, userPassword);
             user.setId(user_id);
             return user;
         } catch (SQLException throwables) {
@@ -68,7 +69,8 @@ public class UserDBRepository implements Repository<String, User> {
                 String user_id = resultSet.getString("username");
                 String first_name = resultSet.getString("first_name");
                 String last_name = resultSet.getString("last_name");
-                User user = new User(first_name, last_name);
+                String userPassword = resultSet.getString("password");
+                User user = new User(first_name, last_name, userPassword);
                 user.setId(user_id);
                 allUsers.add(user);
             }
@@ -94,10 +96,11 @@ public class UserDBRepository implements Repository<String, User> {
                 return user;
             }
             PreparedStatement statement2 = connection.prepareStatement
-                    ("insert into users values (?,?,?)");
+                    ("insert into users values (?,?,?,?)");
             statement2.setString(1,user.getId());
             statement2.setString(2,user.getFirstName());
             statement2.setString(3,user.getLastName());
+            statement2.setString(4,user.getPassword());
             statement2.executeUpdate();
             return null;
         } catch (SQLException throwables) {
@@ -121,13 +124,14 @@ public class UserDBRepository implements Repository<String, User> {
                 return null;
             }
             PreparedStatement statement3 = connection.prepareStatement
-                    ("select first_name, last_name from users where username=?");
+                    ("select first_name, last_name, password from users where username=?");
             statement3.setString(1,user_id);
             ResultSet resultSet3 = statement3.executeQuery();
             resultSet3.next();
             String old_first_name = resultSet3.getString("first_name");
             String old_last_name = resultSet3.getString("last_name");
-            User old_user = new User(old_first_name, old_last_name);
+            String old_password = resultSet3.getString("password");
+            User old_user = new User(old_first_name, old_last_name, old_password);
             old_user.setId(user_id);
             PreparedStatement statement2 = connection.prepareStatement
                     ("delete from users where username=?");
@@ -155,18 +159,20 @@ public class UserDBRepository implements Repository<String, User> {
                 return null;
             }
             PreparedStatement statement3 = connection.prepareStatement
-                    ("select first_name, last_name from users where username=?");
+                    ("select first_name, last_name, password from users where username=?");
             statement3.setString(1,user.getId());
             ResultSet resultSet3 = statement3.getResultSet();
             String old_first_name = resultSet3.getString("first_name");
             String old_last_name = resultSet3.getString("last_name");
-            User old_user = new User(old_first_name, old_last_name);
+            String old_password = resultSet3.getString("password");
+            User old_user = new User(old_first_name, old_last_name, old_password);
             old_user.setId(user.getId());
             PreparedStatement statement2 = connection.prepareStatement
-                    ("update users set first_name=?, last_name=? where username=?");
-            statement2.setString(3,user.getId());
+                    ("update users set first_name=?, last_name=?, password=? where username=?");
+            statement2.setString(4,user.getId());
             statement2.setString(1,user.getFirstName());
             statement2.setString(2,user.getLastName());
+            statement2.setString(3,user.getPassword());
             statement2.executeUpdate();
             return old_user;
         } catch (SQLException throwables) {

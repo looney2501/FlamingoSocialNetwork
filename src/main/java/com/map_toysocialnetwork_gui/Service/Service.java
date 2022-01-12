@@ -10,7 +10,7 @@ import com.map_toysocialnetwork_gui.Domain.Message;
 import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Domain.Validators.ValidatorExceptions.ValidatorException;
-import com.map_toysocialnetwork_gui.GraphUtils.GraphTraversal;
+import com.map_toysocialnetwork_gui.Utils.GraphUtils.GraphTraversal;
 import com.map_toysocialnetwork_gui.Repository.Repository;
 import com.map_toysocialnetwork_gui.Repository.RepositoryExceptions.RepositoryException;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.MessageDBRepository;
@@ -61,8 +61,9 @@ public class Service {
      * @throws ValidatorException if the user attributes are not valid.
      * @throws ServiceException if the user cannot be added in the repository.
      */
-    public void addUser(String username, String firstName, String lastName) {
-        User u = userFactory.createObject(username, firstName, lastName);
+    public void addUser(String username, String firstName, String lastName, String userPassword) {
+        User u = new User(firstName, lastName, userPassword);
+        u.setId(username);
         userValidator.validate(u);
         if (userRepository.save(u)!=null) {
             throw new ServiceException("User already exists!");
@@ -449,9 +450,9 @@ public class Service {
         if (messageRepository.findOne(messageToBeRepliedID) == null) {
             throw new ServiceException("Message to be replied must not be null!");
         }
-        Message replyMessage = new Message(senderUser, receiverUsersList, messageText, dateTime, messageToBeReplied.getId());
+        Message replyMessage = new Message(senderUser, receiverUsersList, messageText, dateTime, messageToBeRepliedID);
         messageRepository.save(replyMessage);
-        return replyMessage;
+        return messageRepository.findReplyFor(messageToBeRepliedID);
     }
 
     /**
@@ -520,7 +521,7 @@ public class Service {
      * @param toUsername - String representing the receiver of the friend request
      *                   The status of friend request will be set to "pending"
      */
-    public void sendFriendRequest(String fromUsername, String toUsername) throws ServiceException{
+    public FriendshipRequest sendFriendRequest(String fromUsername, String toUsername) throws ServiceException{
         if(fromUsername.equals(toUsername)) {
             throw new ServiceException("Nu puteti trimite o cerere voua insiva!");
         }
@@ -547,6 +548,7 @@ public class Service {
         friendshipRequest.setStatus("pending");
         friendshipRequest.setDate(LocalDate.now());
         friendshipRequestRepository.save(friendshipRequest);
+        return friendshipRequest;
     }
 
     /**
@@ -703,6 +705,10 @@ public class Service {
         return friendshipRequests.stream()
                 .filter(notNull.and(predicateSender.and(predicatePending)))
                 .toList();
+    }
+
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
 
