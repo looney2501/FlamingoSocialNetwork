@@ -57,6 +57,16 @@ public class PageController extends Controller {
     }
 
     @FXML
+    public void handleReportsLabelClicked() throws IOException {
+        ReportsController reportsController = new ReportsController();
+        reportsController.setService(service);
+        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/reports-view.fxml"));
+        fxmlLoader.setController(reportsController);
+        Parent root = fxmlLoader.load();
+        subsceneAnchorPane.getChildren().setAll(root);
+    }
+
+    @FXML
     public void handleLogOutButtonAction() throws IOException {
         Main.changeSceneToLogin();
     }

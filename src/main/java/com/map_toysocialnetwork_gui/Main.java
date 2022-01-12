@@ -57,16 +57,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
     }
 
-    public static void changeSceneToUserView(String username) throws IOException {
-        FriendsController currentController = new FriendsController();
-        currentController.setService(service);
-        currentController.setLoggedUsername(username);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/friends-view.fxml"));
-        fxmlLoader.setController(currentController);
-        Parent root = fxmlLoader.load();
-        primaryStage.getScene().setRoot(root);
-    }
-
     public static void changeSceneToFriendsrequestsView(String username) throws IOException {
         FriendRequestsController currentController = new FriendRequestsController();
         currentController.setService(service);
