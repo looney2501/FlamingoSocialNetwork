@@ -61,8 +61,9 @@ public class Service {
      * @throws ValidatorException if the user attributes are not valid.
      * @throws ServiceException if the user cannot be added in the repository.
      */
-    public void addUser(String username, String firstName, String lastName) {
-        User u = userFactory.createObject(username, firstName, lastName);
+    public void addUser(String username, String firstName, String lastName, String userPassword) {
+        User u = new User(firstName, lastName, userPassword);
+        u.setId(username);
         userValidator.validate(u);
         if (userRepository.save(u)!=null) {
             throw new ServiceException("User already exists!");
