@@ -50,7 +50,7 @@
                <children>
                   <Label fx:id="welcomeLabel" alignment="CENTER" text="Welcome!">
                      <font>
-                        <Font name="Lucida Sans Demibold Italic" size="18.0" />
+                        <Font name="Lucida Sans Italic" size="18.0" />
                      </font>
                   </Label>
                </children>

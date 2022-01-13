@@ -13,7 +13,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
@@ -114,7 +116,11 @@ public class FriendsController extends Controller implements Observer {
         friendsTableColumnDelete.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO, ImageView>, ObservableValue<ImageView>>() {
             @Override
             public ObservableValue<ImageView> call(TableColumn.CellDataFeatures<FriendDTO, ImageView> param) {
-                return new SimpleObjectProperty<ImageView>(new ImageView(String.valueOf(Main.class.getResource("images/remove-icon.png"))));
+                Image image = new Image(String.valueOf(Main.class.getResource("images/remove-icon.png")));
+                ImageView imageView = new ImageView(image);
+                imageView.setCursor(Cursor.HAND);
+                //TODO de ce nu merge???
+                return new SimpleObjectProperty<ImageView>(imageView);
             }
         });
         friendsTableView.setItems(friendsModel);
