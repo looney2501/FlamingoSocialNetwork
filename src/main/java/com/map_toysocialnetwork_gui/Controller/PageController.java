@@ -26,6 +26,7 @@ public class PageController extends Controller {
     private ImageView chatImageView;
     @FXML
     private ImageView reportsImageView;
+    //TODO replace labels with hyperlinks
     private String loggedUsername;
     private Page loggedUserPage;
     private FXMLLoader fxmlLoader;

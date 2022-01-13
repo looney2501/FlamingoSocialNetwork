@@ -6,7 +6,7 @@
     -fx-column-halignment: "right";
 }
 
-.label {
+.hyperlink {
     -fx-font-size: 16;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
@@ -16,6 +16,30 @@
 #userFullNameLabel {
     -fx-font-size: 24;
     -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(rgb(68, 68, 68), #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#000000, rgb(68, 68, 68));
+}
+
+#subsceneAnchorPane {
+    -fx-background-color: white;
+}
+
+#welcomeLabel {
+    -fx-font-size: 50;
+    -fx-font-family: "Lucida Sans";
+    -fx-font-style: italic;
     -fx-fill: #818181;
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
