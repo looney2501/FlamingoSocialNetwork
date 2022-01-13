@@ -63,7 +63,7 @@ public class ReportsController extends Controller implements Observer {
         friendsTableColumnReport.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO, ImageView>, ObservableValue<ImageView>>() {
             @Override
             public ObservableValue<ImageView> call(TableColumn.CellDataFeatures<FriendDTO, ImageView> param) {
-                return new SimpleObjectProperty<ImageView>(new ImageView(String.valueOf(Main.class.getResource("images/report-icon.png"))));
+                return new SimpleObjectProperty<ImageView>(new ImageView(String.valueOf(Main.class.getResource("images/report-icon-small.png"))));
             }
         });
         friendsTableView.setItems(friendsModel);

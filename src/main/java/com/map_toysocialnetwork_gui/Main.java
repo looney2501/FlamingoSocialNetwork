@@ -59,17 +59,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
     }
 
-    public static void changeSceneToFriendsrequestsView(String username) throws IOException {
-        FriendRequestsController currentController = new FriendRequestsController();
-        currentController.setService(service);
-        currentController.setLoggedUsername(username);
-        fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/friendrequest-view.fxml"));
-        fxmlLoader.setController(currentController);
-        Parent root = fxmlLoader.load();
-        primaryStage.getScene().setRoot(root);
-
-    }
-
     public static void changeSceneToChatView(String username) throws IOException {
         ChatController currentController = new ChatController();
         currentController.setService(service);
@@ -97,6 +86,7 @@ public class Main extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/page-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
+        root.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/page-view.css")).toExternalForm());
         primaryStage.setScene(new Scene(root));
     }
 
