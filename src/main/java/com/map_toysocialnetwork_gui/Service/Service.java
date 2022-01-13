@@ -710,5 +710,17 @@ public class Service {
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public Conversation filterConversationByDate(Conversation conversationToBeFiltered, LocalDate startDate, LocalDate endDate) {
+        LocalDateTime startDateTime = startDate.atTime(0,0,0);
+        LocalDateTime endDateTime = endDate.atTime(23,59,59);
+        List<Message> allMessages = conversationToBeFiltered.getAllMessages();
+        Predicate<Message> p1 = m -> m.getDateTime().isAfter(startDateTime);
+        Predicate<Message> p2 = m -> m.getDateTime().isBefore(endDateTime);
+        List<Message> filteredMessages = allMessages.stream()
+                .filter(p1.and(p2))
+                .toList();
+        return new Conversation(filteredMessages, conversationToBeFiltered.getAllUsers());
+    }
 }
 
