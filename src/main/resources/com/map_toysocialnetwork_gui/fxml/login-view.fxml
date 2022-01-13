@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="363.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <left>
@@ -40,24 +39,12 @@
                </rowConstraints>
                <children>
                       <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                      <Label prefHeight="26.0" prefWidth="105.0" text="Username:" GridPane.rowIndex="1">
-                          <font>
-                              <Font size="16.0" />
-                          </font>
-                      </Label>
-                  <Label text="Password:" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                      <Label prefHeight="26.0" prefWidth="105.0" text="Username:" GridPane.rowIndex="1" />
+                  <Label text="Password:" GridPane.rowIndex="2" />
                   <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-                <Label fx:id="titleLabel" alignment="CENTER" layoutX="50.0" layoutY="60.0" prefHeight="43.0" prefWidth="261.0" text="FlaminGo!">
-                    <font>
-                        <Font size="32.0" />
-                    </font>
-                </Label>
+                <Label fx:id="titleLabel" alignment="CENTER" layoutX="50.0" layoutY="60.0" prefHeight="43.0" prefWidth="261.0" text="FlaminGo!" />
             </children>
         </AnchorPane>
     </center>
