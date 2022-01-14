@@ -6,33 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="masterPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="masterPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/friendrequests-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="430.0">
+      <AnchorPane prefHeight="600.0" prefWidth="433.0">
          <children>
-            <TableView fx:id="incFrReqTableView" layoutX="40.0" layoutY="100.0" onMouseClicked="#handleIncFrReqTableColumnClicked" prefHeight="400.0" prefWidth="363.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="100.0">
+            <TableView fx:id="incFrReqTableView" layoutX="28.0" layoutY="100.0" onMouseClicked="#handleIncFrReqTableColumnClicked" prefHeight="400.0" prefWidth="382.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
               <columns>
-                  <TableColumn fx:id="incFrReqTableColumnLastName" prefWidth="99.19998168945312" text="Last Name" />
-                <TableColumn fx:id="incFrReqTableColumnFirstName" prefWidth="90.39996337890625" text="First Name" />
-                  <TableColumn fx:id="incFrReqTableColumnDate" prefWidth="71.20001220703125" text="Date" />
-                  <TableColumn fx:id="incFrReqTableColumnAccept" prefWidth="50.0" />
-                  <TableColumn fx:id="incFrReqTableColumnReject" prefWidth="50.4000244140625" />
+                  <TableColumn fx:id="incFrReqTableColumnLastName" editable="false" prefWidth="92.0" sortable="false" text="Last Name" />
+                <TableColumn fx:id="incFrReqTableColumnFirstName" editable="false" prefWidth="97.60003662109375" sortable="false" text="First Name" />
+                  <TableColumn fx:id="incFrReqTableColumnDate" editable="false" prefWidth="90.39996337890625" sortable="false" text="Date" />
+                  <TableColumn fx:id="incFrReqTableColumnAccept" editable="false" prefWidth="49.5999755859375" sortable="false" />
+                  <TableColumn fx:id="incFrReqTableColumnReject" editable="false" prefWidth="47.20001220703125" sortable="false" />
               </columns>
             </TableView>
-            <Label layoutX="159.0" layoutY="52.0" text="Incoming friend requests" AnchorPane.topAnchor="50.0" />
+            <Label fx:id="incomingFriends" layoutX="159.0" layoutY="52.0" text="Incoming friend requests" AnchorPane.topAnchor="50.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="600.0" prefWidth="370.0">
+      <AnchorPane prefHeight="600.0" prefWidth="384.0">
          <children>
-            <TableView fx:id="outFrReqTableView" layoutX="11.0" layoutY="100.0" onMouseClicked="#handleOutFrReqTableColumnClicked" prefHeight="400.0" prefWidth="320.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="100.0">
+            <TableView fx:id="outFrReqTableView" layoutX="22.0" layoutY="100.0" onMouseClicked="#handleOutFrReqTableColumnClicked" prefHeight="400.0" prefWidth="317.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="100.0">
                <columns>
-                  <TableColumn fx:id="outFrReqTableColumnLastName" prefWidth="88.79998779296875" text="Last Name" />
-                  <TableColumn fx:id="outFrReqTableColumnFirstName" prefWidth="104.00000762939453" text="First Name" />
-                  <TableColumn fx:id="outFrReqTableColumnDate" prefWidth="74.4000244140625" text="Date" />
-                  <TableColumn fx:id="outFrReqTableColumnCancel" prefWidth="51.199951171875" />
+                  <TableColumn fx:id="outFrReqTableColumnLastName" editable="false" prefWidth="88.79998779296875" sortable="false" text="Last Name" />
+                  <TableColumn fx:id="outFrReqTableColumnFirstName" editable="false" prefWidth="104.00000762939453" sortable="false" text="First Name" />
+                  <TableColumn fx:id="outFrReqTableColumnDate" prefWidth="74.4000244140625" sortable="false" text="Date" />
+                  <TableColumn fx:id="outFrReqTableColumnCancel" editable="false" prefWidth="47.199951171875" sortable="false" />
                </columns>
             </TableView>
-            <Label layoutX="107.0" layoutY="50.0" text="Outgoing friend requests" AnchorPane.topAnchor="50.0" />
+            <Label fx:id="outgoingFriends" layoutX="107.0" layoutY="50.0" text="Outgoing friend requests" AnchorPane.topAnchor="50.0" />
          </children>
       </AnchorPane>
    </children>

@@ -130,7 +130,7 @@ public class FriendRequestsController extends Controller implements Observer {
             }
         });
         incFrReqTableView.setItems(friendshipRequestsReceiversModel);
-        incFrReqTableView.getSelectionModel().setCellSelectionEnabled(true);
+//        incFrReqTableView.getSelectionModel().setCellSelectionEnabled(true);
         refreshIncomingFriendRequests();
     }
 
@@ -160,7 +160,7 @@ public class FriendRequestsController extends Controller implements Observer {
             }
         });
         outFrReqTableView.setItems(friendshipRequestsSenderModel);
-        outFrReqTableView.getSelectionModel().setCellSelectionEnabled(true);
+//        outFrReqTableView.getSelectionModel().setCellSelectionEnabled(true);
         refreshOutgoingFriendRequests();
     }
 
