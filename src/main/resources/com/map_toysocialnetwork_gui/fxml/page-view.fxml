@@ -46,7 +46,7 @@
    <center>
       <AnchorPane fx:id="subsceneAnchorPane" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="rightPane" alignment="CENTER" prefHeight="600.0" prefWidth="857.0">
+            <VBox fx:id="rightPane" alignment="CENTER" prefHeight="600.0" prefWidth="800.0">
                <children>
                   <Label fx:id="welcomeLabel" alignment="CENTER" text="Welcome!">
                      <font>

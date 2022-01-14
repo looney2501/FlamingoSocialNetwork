@@ -17,9 +17,6 @@
 }
 
 #searchUserTextField {
-}
-
-.text-field {
     -fx-background-color: -fx-text-box-border, -fx-background ;
     -fx-background-insets: 0, 0 0 1 0 ;
     -fx-background-radius: 0 ;
@@ -27,6 +24,41 @@
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
+
 .text-field:focused {
     -fx-background-color: #f4d39d, -fx-background ;
+}
+
+.table-view {
+    -fx-background-color: #fcf1de;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: #f4d39d;
+    -fx-border-width: 0;
+}
+
+.table-view .column-header .label {
+    -fx-alignment: center;
+    -fx-font-size: 12pt;
+}
+
+.table-row-cell,
+.table-row-cell:odd {
+    -fx-background-color: #fcf1de;
+}
+
+.table-row-cell:selected .table-cell{
+    -fx-background-color: #fcf1de;
+    -fx-text-fill: #333333;
+}
+
+.table-view .table-cell {
+    -fx-border-color: #fcf1de;
+    -fx-border-width: 1 0 0 0;
+    -fx-font-size: 10pt;
+    -fx-padding: 5 3 15 3;
+    -fx-alignment: center;
 }

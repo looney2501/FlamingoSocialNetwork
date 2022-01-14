@@ -17,6 +17,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.util.Objects;
@@ -113,6 +114,7 @@ public class FriendsController extends Controller implements Observer {
                 return new SimpleStringProperty(param.getValue().getDate().toString());
             }
         });
+        friendsTableColumnDelete.setSortable(false);
         friendsTableColumnDelete.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO, ImageView>, ObservableValue<ImageView>>() {
             @Override
             public ObservableValue<ImageView> call(TableColumn.CellDataFeatures<FriendDTO, ImageView> param) {
@@ -124,7 +126,7 @@ public class FriendsController extends Controller implements Observer {
             }
         });
         friendsTableView.setItems(friendsModel);
-        friendsTableView.getSelectionModel().setCellSelectionEnabled(true);
+        setTableProperties(friendsTableView);
     }
 
     private void initializeSearchedUsersTableView() {
@@ -147,7 +149,12 @@ public class FriendsController extends Controller implements Observer {
             }
         });
         searchedUsersTableView.setItems(searchedUsersModel);
-        searchedUsersTableView.getSelectionModel().setCellSelectionEnabled(true);
+        setTableProperties(searchedUsersTableView);
+    }
+
+    private void setTableProperties(TableView tableView) {
+        tableView.setPlaceholder(new Text(""));
+        //tableView.getSelectionModel().setCellSelectionEnabled(true);
     }
 
     public void setLoggedUsername(String loggedUsername) {
