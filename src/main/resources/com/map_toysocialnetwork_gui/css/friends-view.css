@@ -16,18 +16,20 @@
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
-#searchUserTextField {
-    -fx-background-color: -fx-text-box-border, -fx-background ;
+.text-field {
+    -fx-background-color: #fcf1de;
     -fx-background-insets: 0, 0 0 1 0 ;
     -fx-background-radius: 0 ;
     -fx-font-size: 16;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-border-width: 0.3pt;
+    -fx-border-color: #333333;
 }
 
-.text-field:focused {
-    -fx-background-color: #f4d39d, -fx-background ;
-}
+/*.text-field:focused {*/
+/*    -fx-background-color: #f4d39d;*/
+/*}*/
 
 .table-view {
     -fx-background-color: #fcf1de;
