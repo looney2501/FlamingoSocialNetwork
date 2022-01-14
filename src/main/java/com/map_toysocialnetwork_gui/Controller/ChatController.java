@@ -10,12 +10,17 @@ import com.map_toysocialnetwork_gui.Utils.Observer.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -74,7 +79,20 @@ public class ChatController extends Controller implements Observer {
 
     @FXML
     public void handleSendNewMessageAction() throws IOException {
-        Main.changeSceneToSendNewMessage(loggedUsername);
+        Stage newMessageStage = new Stage();
+        newMessageStage.setResizable(false);
+        newMessageStage.initModality(Modality.APPLICATION_MODAL);
+
+        SendNewMessageController sendNewMessageController = new SendNewMessageController();
+        sendNewMessageController.setService(service);
+        sendNewMessageController.setLoggedUsername(loggedUsername);
+        sendNewMessageController.setUserPage(userPage);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/send-new-message-view.fxml"));
+        fxmlLoader.setController(sendNewMessageController);
+        Parent root = fxmlLoader.load();
+        newMessageStage.setScene(new Scene(root));
+
+        newMessageStage.show();
     }
 
     public void initialize() {

@@ -1,8 +1,10 @@
 package com.map_toysocialnetwork_gui.Controller;
 
 import com.map_toysocialnetwork_gui.Domain.DTO.FriendDTO;
+import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Main;
 import com.map_toysocialnetwork_gui.Service.ServiceExceptions.ServiceException;
+import com.map_toysocialnetwork_gui.Utils.Observer.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class SendNewMessageController extends Controller {
+public class SendNewMessageController extends Controller implements Observer {
 
     @FXML
     private ListView<FriendDTO> friendsListView;
@@ -22,11 +24,7 @@ public class SendNewMessageController extends Controller {
     private TextField messageTextField;
     private String loggedUsername;
     private ObservableList<FriendDTO> friendsModel = FXCollections.observableArrayList();
-
-    @FXML
-    public void handleGoBackAction() throws IOException {
-        Main.changeSceneToChatView(loggedUsername);
-    }
+    private Page userPage;
 
     @FXML
     public void handleSendNewMessageAction() {
@@ -100,5 +98,15 @@ public class SendNewMessageController extends Controller {
 
     public void setLoggedUsername(String loggedUsername) {
         this.loggedUsername = loggedUsername;
+    }
+
+    public void setUserPage(Page userPage) {
+        this.userPage = userPage;
+    }
+
+
+    @Override
+    public void update() {
+
     }
 }
