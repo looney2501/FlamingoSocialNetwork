@@ -35,6 +35,7 @@
 .list-view {
     -fx-background-color: #fcf1de;
     -fx-selection-bar: #f4d39d;
+    -fx-selection-bar-non-focused: #f4d39d ;
 }
 
 .list-view .list-cell {

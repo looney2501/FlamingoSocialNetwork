@@ -29,9 +29,9 @@ public class SendNewMessageController extends Controller implements Observer {
     @FXML
     public void handleSendNewMessageAction() {
         MultipleSelectionModel<FriendDTO> friendDTOMultipleSelectionModel = friendsListView.getSelectionModel();
+        ObservableList<FriendDTO> selectedFriends = friendDTOMultipleSelectionModel.getSelectedItems();
         String messageText = messageTextField.getText();
-        if (!messageText.equals("") && friendDTOMultipleSelectionModel!=null) {
-            ObservableList<FriendDTO> selectedFriends = friendDTOMultipleSelectionModel.getSelectedItems();
+        if (!messageText.equals("") && selectedFriends.size()>0) {
             List<String> receiversUsername = selectedFriends.stream()
                                     .map(x->x.getUser().getId())
                                     .toList();
