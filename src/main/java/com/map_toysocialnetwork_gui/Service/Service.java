@@ -1,13 +1,10 @@
 package com.map_toysocialnetwork_gui.Service;
 
+import com.map_toysocialnetwork_gui.Domain.*;
 import com.map_toysocialnetwork_gui.Domain.DTO.Conversation;
 import com.map_toysocialnetwork_gui.Domain.DTO.FriendDTO;
 import com.map_toysocialnetwork_gui.Domain.Factory.FriendshipFactory;
 import com.map_toysocialnetwork_gui.Domain.Factory.UserFactory;
-import com.map_toysocialnetwork_gui.Domain.Friendship;
-import com.map_toysocialnetwork_gui.Domain.FriendshipRequest;
-import com.map_toysocialnetwork_gui.Domain.Message;
-import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Domain.Validators.ValidatorExceptions.ValidatorException;
 import com.map_toysocialnetwork_gui.Utils.GraphUtils.GraphTraversal;
@@ -711,7 +708,7 @@ public class Service {
         return userRepository.findAll();
     }
 
-    public Conversation filterConversationByDate(Conversation conversationToBeFiltered, LocalDate startDate, LocalDate endDate) {
+    public Conversation getConversationBetweenDates(Conversation conversationToBeFiltered, LocalDate startDate, LocalDate endDate) {
         LocalDateTime startDateTime = startDate.atTime(0,0,0);
         LocalDateTime endDateTime = endDate.atTime(23,59,59);
         List<Message> allMessages = conversationToBeFiltered.getAllMessages();
@@ -721,6 +718,17 @@ public class Service {
                 .filter(p1.and(p2))
                 .toList();
         return new Conversation(filteredMessages, conversationToBeFiltered.getAllUsers());
+    }
+
+    public List<FriendDTO> getFriendshipsMadeBetweenDates(Page userPage, LocalDate startDate, LocalDate endDate) {
+        LocalDate startDate1 = startDate.minusDays(1);
+        LocalDate endDate1 = endDate.plusDays(1);
+        List<FriendDTO> friendships = userPage.getFriends();
+        Predicate<FriendDTO> p1 = f -> f.getDate().isAfter(startDate1);
+        Predicate<FriendDTO> p2 = f -> f.getDate().isBefore(endDate1);
+        return userPage.getFriends().stream()
+                .filter(p1.and(p2))
+                .toList();
     }
 }
 

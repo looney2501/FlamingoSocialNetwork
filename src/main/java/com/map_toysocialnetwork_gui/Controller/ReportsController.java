@@ -18,7 +18,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -72,7 +71,7 @@ public class ReportsController extends Controller implements Observer {
                     List<Conversation> conversationWithUser = allConversations.stream()
                             .filter(c -> c.getAllUsers().size()==2 && c.getAllUsers().contains(friendSelectedDTO.getUser()))
                             .toList();
-                    Conversation filteredConversation = service.filterConversationByDate(conversationWithUser.get(0), startDate, endDate);
+                    Conversation filteredConversation = service.getConversationBetweenDates(conversationWithUser.get(0), startDate, endDate);
                     generatePrivateChatReportPDF(filteredConversation, startDate, endDate);
                 }
             }
@@ -90,25 +89,31 @@ public class ReportsController extends Controller implements Observer {
         User otherUser = conversation.getAllUsers().get(0);
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA, 20);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+        contentStream.moveTextPositionByAmount(400,20);
+        contentStream.drawString("Report made on: " + LocalDate.now().toString());
+        contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 20);
         contentStream.moveTextPositionByAmount(50,750);
         contentStream.drawString("Logged user: " + loggedUser.toString());
         contentStream.endText();
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA, 20);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 20);
         contentStream.moveTextPositionByAmount(50, 730);
         contentStream.drawString("Other user: " + otherUser.toString());
         contentStream.endText();
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA, 18);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
         contentStream.moveTextPositionByAmount(50, 710);
         contentStream.drawString("Start date: " + startDate.toString());
         contentStream.endText();
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.HELVETICA, 18);
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
         contentStream.moveTextPositionByAmount(50, 690);
         contentStream.drawString("End date: " + endDate.toString());
         contentStream.endText();
@@ -118,7 +123,7 @@ public class ReportsController extends Controller implements Observer {
         for (Message m: conversation.getAllMessages()) {
             if (ty > 40) {
                 contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
                 contentStream.moveTextPositionByAmount(15, ty);
                 contentStream.drawString(m.toString());
                 contentStream.endText();
@@ -127,10 +132,16 @@ public class ReportsController extends Controller implements Observer {
             else {
                 page = new PDPage();
                 document.addPage(page);
+                contentStream.close();
                 contentStream = new PDPageContentStream(document, page);
                 ty = 700;
                 contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+                contentStream.moveTextPositionByAmount(400,20);
+                contentStream.drawString("Report made on: " + LocalDate.now().toString());
+                contentStream.endText();
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
                 contentStream.moveTextPositionByAmount(15, ty);
                 contentStream.drawString(m.toString());
                 contentStream.endText();
@@ -140,13 +151,36 @@ public class ReportsController extends Controller implements Observer {
 
         contentStream.close();
 
-        File file = FileSaverPDF.choosePDFSaveFile("test");
-        document.save(file);
+        File file = FileSaverPDF.choosePDFSaveFile("Conversation-report");
+        if (file!=null) {
+            document.save(file);
+        }
         document.close();
     }
 
     @FXML
     public void handleGenerateReportAction() throws IOException {
+        LocalDate startDate = dateChooserStart.getValue();
+        LocalDate endDate = dateChooserEnd.getValue();
+        if ((startDate == null || endDate == null) || (startDate.isAfter(endDate))) {
+            MessageAlert.showErrorMessage(null, "Interval de timp invalid!");
+        }
+        else {
+            List<FriendDTO> friendshipsMadeBetweenDates = service.getFriendshipsMadeBetweenDates(userPage, startDate, endDate);
+            List<Conversation> friendsConversationsBetweenDates = userPage.getConversations().stream()
+                    .filter(x -> x.getAllUsers().size() == 2)
+                    .map(c -> service.getConversationBetweenDates(c, startDate, endDate))
+                    .toList();
+            generateAllFriendsChatReportPDF(friendshipsMadeBetweenDates, friendsConversationsBetweenDates, startDate, endDate);
+        }
+    }
+
+    private void generateAllFriendsChatReportPDF(List<FriendDTO> friendships,
+                                                 List<Conversation> conversations,
+                                                 LocalDate startDate,
+                                                 LocalDate endDate) throws IOException {
+
+
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
@@ -154,15 +188,119 @@ public class ReportsController extends Controller implements Observer {
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
         contentStream.beginText();
-        contentStream.setFont(PDType1Font.TIMES_ROMAN, 20);
-        //contentStream.moveTextPositionByAmount(250,750);
-        contentStream.drawString("Registration form");
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+        contentStream.moveTextPositionByAmount(400,20);
+        contentStream.drawString("Report made on: " + LocalDate.now().toString());
         contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 20);
+        contentStream.moveTextPositionByAmount(20,750);
+        contentStream.drawString("Raport prietenii pentru utilizatorul " + service.findUser(loggedUsername).toString());
+        contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
+        contentStream.moveTextPositionByAmount(50, 720);
+        contentStream.drawString("Start date: " + startDate.toString());
+        contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
+        contentStream.moveTextPositionByAmount(50, 700);
+        contentStream.drawString("End date: " + endDate.toString());
+        contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
+        contentStream.moveTextPositionByAmount(30, 670);
+        contentStream.drawString("Friendships made: " + friendships.size());
+        contentStream.endText();
+
+        int ty = 650;
+        for (FriendDTO fr: friendships) {
+            if (ty > 30) {
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 15);
+                contentStream.moveTextPositionByAmount(30, ty);
+                contentStream.drawString(fr.getUser().toString() + ' ' + fr.getDate().toString());
+                contentStream.endText();
+                ty-=20;
+            }
+            else {
+                page = new PDPage();
+                document.addPage(page);
+                contentStream.close();
+                contentStream = new PDPageContentStream(document, page);
+                ty = 700;
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+                contentStream.moveTextPositionByAmount(400,20);
+                contentStream.drawString("Report made on: " + LocalDate.now().toString());
+                contentStream.endText();
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 15);
+                contentStream.moveTextPositionByAmount(30, ty);
+                contentStream.drawString(fr.getUser().toString() + ' ' + fr.getDate().toString());
+                contentStream.endText();
+                ty-=20;
+            }
+        }
+
+        page = new PDPage();
+        document.addPage(page);
+        contentStream.close();
+        contentStream = new PDPageContentStream(document, page);
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+        contentStream.moveTextPositionByAmount(400,20);
+        contentStream.drawString("Report made on: " + LocalDate.now().toString());
+        contentStream.endText();
+
+        contentStream.beginText();
+        contentStream.setFont(PDType1Font.TIMES_ROMAN, 18);
+        contentStream.moveTextPositionByAmount(30, 750);
+        contentStream.drawString("Message statistics");
+        contentStream.endText();
+
+        ty = 730;
+
+        for (Conversation c: conversations) {
+            if (ty > 30) {
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 15);
+                contentStream.moveTextPositionByAmount(30, ty);
+                contentStream.drawString(c.getAllUsers().get(0).toString() + ", " + c.getAllUsers().get(1).toString() + "; " + c.getAllMessages().size());
+                contentStream.endText();
+                ty-=20;
+            }
+            else {
+                page = new PDPage();
+                document.addPage(page);
+                contentStream.close();
+                contentStream = new PDPageContentStream(document, page);
+                ty = 700;
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
+                contentStream.moveTextPositionByAmount(400,20);
+                contentStream.drawString("Report made on: " + LocalDate.now().toString());
+                contentStream.endText();
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.TIMES_ROMAN, 15);
+                contentStream.moveTextPositionByAmount(30, ty);
+                contentStream.drawString(c.getAllUsers().get(0).toString() + ", " + c.getAllUsers().get(1).toString() + "; " + c.getAllMessages().size());
+                contentStream.endText();
+                ty-=20;
+            }
+        }
 
         contentStream.close();
 
-        File file = FileSaverPDF.choosePDFSaveFile("test");
-        document.save(file);
+        File file = FileSaverPDF.choosePDFSaveFile("Friendships-report");
+        if (file!=null) {
+            document.save(file);
+        }
         document.close();
     }
 
