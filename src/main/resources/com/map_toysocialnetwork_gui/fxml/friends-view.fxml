@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="masterPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/friends-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="400.0">
          <children>
@@ -24,12 +23,12 @@
                </columns>
             </TableView>
             <HBox layoutX="314.3999938964844" />
-            <Label layoutX="185.0" layoutY="38.0" text="My friends" />
+            <Label fx:id="friendsLabel" layoutX="185.0" layoutY="38.0" text="My friends" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="400.0">
          <children>
-            <GridPane layoutX="100.0" layoutY="61.0" prefHeight="36.0" prefWidth="200.0">
+            <GridPane layoutX="75.0" layoutY="58.0" prefHeight="36.0" prefWidth="249.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -38,8 +37,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="searchUserTextField" GridPane.columnIndex="1" />
-                  <Label text="Search for user" />
+                  <TextField fx:id="searchUserTextField" prefWidth="74.0" GridPane.columnIndex="1" />
+                  <Label fx:id="searchLabel" text="Search for user:" />
                </children>
             </GridPane>
             <TableView fx:id="searchedUsersTableView" layoutX="91.0" layoutY="149.0" onMouseClicked="#handleSearchedUserTableCellMouseClickedAction" prefHeight="398.0" prefWidth="218.0">
