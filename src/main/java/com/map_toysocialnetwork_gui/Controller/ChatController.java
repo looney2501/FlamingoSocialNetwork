@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.security.auth.callback.Callback;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -117,6 +118,20 @@ public class ChatController extends Controller implements Observer {
         });
         listViewConversations.setItems(conversationsModel);
         listViewChat.setItems(chatModel);
+        listViewChat.setCellFactory(param -> new ListCell<>() {
+            @Override
+            public void updateItem(Message message, boolean empty) {
+                super.updateItem(message, empty);
+                if (empty || message == null) {
+                    setText(null);
+                    setGraphic(null);
+                    setMouseTransparent(true);
+                    setFocusTraversable(true);
+                } else {
+                    setText(message.toString());
+                }
+            }
+        });
         refreshConversations();
     }
 

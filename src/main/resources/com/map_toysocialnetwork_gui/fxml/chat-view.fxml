@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="masterPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/chat-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="200.0">
          <children>
-            <Label layoutX="62.0" layoutY="31.0" text="Conversations" />
+            <Label layoutX="47.0" layoutY="35.0" text="Conversations" />
             <ListView fx:id="listViewConversations" layoutX="25.0" layoutY="73.0" onMouseClicked="#handleConversationsViewListItemSelection" prefHeight="408.0" prefWidth="150.0" />
-            <Button layoutX="41.0" layoutY="519.0" mnemonicParsing="false" onAction="#handleSendNewMessageAction" text="Send new message" />
+            <Button layoutX="28.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleSendNewMessageAction" prefHeight="37.0" prefWidth="143.0" text="Send new message" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="600.0">
          <children>
             <ListView fx:id="listViewChat" layoutX="19.0" layoutY="39.0" prefHeight="466.0" prefWidth="562.0" />
             <TextField fx:id="messageTextField" layoutX="19.0" layoutY="523.0" onKeyPressed="#handleEnterPressed" prefHeight="26.0" prefWidth="479.0" />
-            <Button layoutX="513.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleSendMessageAction" prefHeight="25.0" prefWidth="67.0" text="Send" />
+            <Button layoutX="513.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleSendMessageAction" prefHeight="38.0" prefWidth="67.0" text="Send" />
          </children>
       </AnchorPane>
    </children>

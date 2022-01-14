@@ -1,0 +1,43 @@
+#masterPane {
+    -fx-background-color: #fcf1de;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(rgb(68, 68, 68), #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#000000, rgb(68, 68, 68));
+}
+
+.label {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-font-size: 16;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-border-width: 0.3pt;
+    -fx-border-color: #333333;
+}
+
+.list-view {
+    -fx-background-color: white;
+    -fx-selection-bar: #f4d39d;
+    -fx-selection-bar-non-focused: #f4d39d ;
+}
+
+#listViewChat .list-cell {
+    -fx-background-color: white;
+}
