@@ -1,6 +1,7 @@
 package com.map_toysocialnetwork_gui.Controller;
 
 import com.map_toysocialnetwork_gui.Domain.Page;
+import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,9 @@ import java.io.IOException;
 public class PageController extends Controller {
 
     @FXML
-    private Label userFullNameLabel;
+    private Label userLastNameLabel;
+    @FXML
+    private Label userFirstNameLabel;
     @FXML
     private AnchorPane subsceneAnchorPane;
     @FXML
@@ -85,7 +88,9 @@ public class PageController extends Controller {
 
     public void initialize() {
         loggedUserPage = new Page(loggedUsername, service);
-        userFullNameLabel.setText(loggedUserPage.getUser().getFirstName() + " " + loggedUserPage.getUser().getLastName());
+        User logedUser = loggedUserPage.getUser();
+        userLastNameLabel.setText(logedUser.getLastName());
+        userFirstNameLabel.setText(logedUser.getFirstName());
         initializeImageViews();
     }
 
