@@ -2,6 +2,10 @@
     -fx-background-color: #f4d39d;
 }
 
+#rightPane {
+    -fx-background-color: #fcf1de;
+}
+
 #leftMenuGridPane {
     -fx-column-halignment: "right";
 }

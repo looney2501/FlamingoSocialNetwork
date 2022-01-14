@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="1100.0" stylesheets="@../css/page-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
     <AnchorPane fx:id="leftMenuAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
@@ -46,7 +46,7 @@
    <center>
       <AnchorPane fx:id="subsceneAnchorPane" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="600.0" prefWidth="857.0">
+            <VBox fx:id="rightPane" alignment="CENTER" prefHeight="600.0" prefWidth="857.0">
                <children>
                   <Label fx:id="welcomeLabel" alignment="CENTER" text="Welcome!">
                      <font>

@@ -55,7 +55,6 @@ public class Main extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/login-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
-        root.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/login-view.css")).toExternalForm());
         primaryStage.setScene(new Scene(root));
     }
 
@@ -86,7 +85,6 @@ public class Main extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/page-view.fxml"));
         fxmlLoader.setController(currentController);
         Parent root = fxmlLoader.load();
-        root.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/page-view.css")).toExternalForm());
         primaryStage.setScene(new Scene(root));
     }
 
