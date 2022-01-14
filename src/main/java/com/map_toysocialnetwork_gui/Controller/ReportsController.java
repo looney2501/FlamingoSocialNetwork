@@ -32,6 +32,7 @@ import java.util.Objects;
 
 public class ReportsController extends Controller implements Observer {
 
+    //TODO aici  de terminat
     @FXML
     TableView<FriendDTO> friendsTableView;
     @FXML
