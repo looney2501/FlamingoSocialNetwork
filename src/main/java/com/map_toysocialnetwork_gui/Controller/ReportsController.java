@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -32,7 +33,6 @@ import java.util.Objects;
 
 public class ReportsController extends Controller implements Observer {
 
-    //TODO aici  de terminat
     @FXML
     TableView<FriendDTO> friendsTableView;
     @FXML
@@ -306,6 +306,7 @@ public class ReportsController extends Controller implements Observer {
     }
 
     private void initializeFriendsTableView() {
+        friendsTableView.setPlaceholder(new Text(""));
         friendsTableColumnLastName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendDTO,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendDTO, String> param) {
@@ -325,7 +326,6 @@ public class ReportsController extends Controller implements Observer {
             }
         });
         friendsTableView.setItems(friendsModel);
-        friendsTableView.getSelectionModel().setCellSelectionEnabled(true);
     }
 
     @Override
