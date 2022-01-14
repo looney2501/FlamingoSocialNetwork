@@ -28,6 +28,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,7 +73,13 @@ public class ReportsController extends Controller implements Observer {
                     List<Conversation> conversationWithUser = allConversations.stream()
                             .filter(c -> c.getAllUsers().size()==2 && c.getAllUsers().contains(friendSelectedDTO.getUser()))
                             .toList();
-                    Conversation filteredConversation = service.getConversationBetweenDates(conversationWithUser.get(0), startDate, endDate);
+                    Conversation filteredConversation;
+                    if (conversationWithUser.size()>0) {
+                        filteredConversation = service.getConversationBetweenDates(conversationWithUser.get(0), startDate, endDate);
+                    }
+                    else {
+                        filteredConversation = new Conversation(new ArrayList<Message>(), List.of(userPage.getUser(), friendSelectedDTO.getUser()));
+                    }
                     generatePrivateChatReportPDF(filteredConversation, startDate, endDate);
                 }
             }
@@ -88,6 +95,9 @@ public class ReportsController extends Controller implements Observer {
 
         User loggedUser = service.findUser(loggedUsername);
         User otherUser = conversation.getAllUsers().get(0);
+        if (otherUser.equals(loggedUser)) {
+            otherUser = conversation.getAllUsers().get(1);
+        }
 
         contentStream.beginText();
         contentStream.setFont(PDType1Font.TIMES_ROMAN, 10);
