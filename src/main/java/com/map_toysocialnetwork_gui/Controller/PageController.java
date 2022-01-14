@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -16,6 +18,14 @@ public class PageController extends Controller {
     private Label userFullNameLabel;
     @FXML
     private AnchorPane subsceneAnchorPane;
+    @FXML
+    private ImageView friendsImageView;
+    @FXML
+    private ImageView friendRequestsImageView;
+    @FXML
+    private ImageView chatImageView;
+    @FXML
+    private ImageView reportsImageView;
     private String loggedUsername;
     private Page loggedUserPage;
     private FXMLLoader fxmlLoader;
@@ -76,6 +86,14 @@ public class PageController extends Controller {
     public void initialize() {
         loggedUserPage = new Page(loggedUsername, service);
         userFullNameLabel.setText(loggedUserPage.getUser().getFirstName() + " " + loggedUserPage.getUser().getLastName());
+        initializeImageViews();
+    }
+
+    private void initializeImageViews() {
+        chatImageView.setImage(new Image(String.valueOf(Main.class.getResource("images/messages-icon.png"))));
+        friendsImageView.setImage(new Image(String.valueOf(Main.class.getResource("images/friends-icon.png"))));
+        friendRequestsImageView.setImage(new Image(String.valueOf(Main.class.getResource("images/friend-request-icon.png"))));
+        reportsImageView.setImage(new Image(String.valueOf(Main.class.getResource("images/report-icon-big.png"))));
     }
 
     public void setLoggedUsername(String loggedUsername) {
