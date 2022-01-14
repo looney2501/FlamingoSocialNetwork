@@ -19,7 +19,7 @@
                   <TableColumn fx:id="incFrReqTableColumnReject" editable="false" prefWidth="47.20001220703125" sortable="false" />
               </columns>
             </TableView>
-            <Label fx:id="incomingFriends" layoutX="159.0" layoutY="52.0" text="Incoming friend requests" AnchorPane.topAnchor="50.0" />
+            <Label fx:id="incomingFriends" layoutX="118.0" layoutY="48.0" text="Incoming friend requests" AnchorPane.topAnchor="48.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="384.0">
@@ -32,7 +32,7 @@
                   <TableColumn fx:id="outFrReqTableColumnCancel" editable="false" prefWidth="47.199951171875" sortable="false" />
                </columns>
             </TableView>
-            <Label fx:id="outgoingFriends" layoutX="107.0" layoutY="50.0" text="Outgoing friend requests" AnchorPane.topAnchor="50.0" />
+            <Label fx:id="outgoingFriends" layoutX="93.0" layoutY="49.0" text="Outgoing friend requests" AnchorPane.topAnchor="49.0" />
          </children>
       </AnchorPane>
    </children>

@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -99,6 +100,7 @@ public class FriendRequestsController extends Controller implements Observer {
     }
 
     public void initializeIncFrReqTableView() {
+        incFrReqTableView.setPlaceholder(new Text(""));
         incFrReqTableColumnLastName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendshipRequest, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendshipRequest, String> param) {
@@ -135,6 +137,7 @@ public class FriendRequestsController extends Controller implements Observer {
     }
 
     public void initializeOutFrReqTableView() {
+        outFrReqTableView.setPlaceholder(new Text(""));
         outFrReqTableColumnLastName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FriendshipRequest, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<FriendshipRequest, String> param) {
