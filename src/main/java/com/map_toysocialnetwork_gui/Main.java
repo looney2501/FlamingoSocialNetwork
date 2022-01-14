@@ -41,6 +41,7 @@ public class Main extends Application {
         friendshipRequestDBRepository = new FriendshipRequestDBRepository(userDBRepository,"jdbc:postgresql://localhost:5432/ToySocialNetwork", "postgres", "postgres");
         service = new Service(userDBRepository, friendshipDBRepository,friendshipRequestDBRepository, messageDBRepository, userValidator);
         primaryStage = stage;
+        primaryStage.setResizable(false);
         initView(stage);
     }
 
