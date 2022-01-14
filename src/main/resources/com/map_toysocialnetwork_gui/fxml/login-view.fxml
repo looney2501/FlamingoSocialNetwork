@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="363.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="363.0" prefWidth="616.0" stylesheets="@../css/login-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <left>
         <AnchorPane prefHeight="363.0" prefWidth="256.0" style="-fx-background-color: #f4d39d;" BorderPane.alignment="CENTER">
             <children>
