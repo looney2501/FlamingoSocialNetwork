@@ -163,7 +163,7 @@ public class ReportsController extends Controller implements Observer {
         LocalDate startDate = dateChooserStart.getValue();
         LocalDate endDate = dateChooserEnd.getValue();
         if ((startDate == null || endDate == null) || (startDate.isAfter(endDate))) {
-            MessageAlert.showErrorMessage(null, "Interval de timp invalid!");
+            MessageAlert.showErrorMessage(null, "Date interval is not valid!");
         }
         else {
             List<FriendDTO> friendshipsMadeBetweenDates = service.getFriendshipsMadeBetweenDates(userPage, startDate, endDate);
@@ -196,7 +196,7 @@ public class ReportsController extends Controller implements Observer {
         contentStream.beginText();
         contentStream.setFont(PDType1Font.TIMES_ROMAN, 20);
         contentStream.moveTextPositionByAmount(20,750);
-        contentStream.drawString("Raport prietenii pentru utilizatorul " + service.findUser(loggedUsername).toString());
+        contentStream.drawString("Friendships report for user " + service.findUser(loggedUsername).toString());
         contentStream.endText();
 
         contentStream.beginText();
