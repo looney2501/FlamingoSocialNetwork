@@ -29,6 +29,7 @@ public class Message extends Entity<Integer>{
         this.text = message;
         this.dateTime = dateTime;
         this.repliesTo = repliesTo;
+
     }
 
     /**

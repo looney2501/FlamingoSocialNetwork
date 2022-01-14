@@ -1,13 +1,10 @@
 package com.map_toysocialnetwork_gui.Service;
 
+import com.map_toysocialnetwork_gui.Domain.*;
 import com.map_toysocialnetwork_gui.Domain.DTO.Conversation;
 import com.map_toysocialnetwork_gui.Domain.DTO.FriendDTO;
 import com.map_toysocialnetwork_gui.Domain.Factory.FriendshipFactory;
 import com.map_toysocialnetwork_gui.Domain.Factory.UserFactory;
-import com.map_toysocialnetwork_gui.Domain.Friendship;
-import com.map_toysocialnetwork_gui.Domain.FriendshipRequest;
-import com.map_toysocialnetwork_gui.Domain.Message;
-import com.map_toysocialnetwork_gui.Domain.User;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Domain.Validators.ValidatorExceptions.ValidatorException;
 import com.map_toysocialnetwork_gui.Utils.GraphUtils.GraphTraversal;
@@ -709,6 +706,29 @@ public class Service {
 
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public Conversation getConversationBetweenDates(Conversation conversationToBeFiltered, LocalDate startDate, LocalDate endDate) {
+        LocalDateTime startDateTime = startDate.atTime(0,0,0);
+        LocalDateTime endDateTime = endDate.atTime(23,59,59);
+        List<Message> allMessages = conversationToBeFiltered.getAllMessages();
+        Predicate<Message> p1 = m -> m.getDateTime().isAfter(startDateTime);
+        Predicate<Message> p2 = m -> m.getDateTime().isBefore(endDateTime);
+        List<Message> filteredMessages = allMessages.stream()
+                .filter(p1.and(p2))
+                .toList();
+        return new Conversation(filteredMessages, conversationToBeFiltered.getAllUsers());
+    }
+
+    public List<FriendDTO> getFriendshipsMadeBetweenDates(Page userPage, LocalDate startDate, LocalDate endDate) {
+        LocalDate startDate1 = startDate.minusDays(1);
+        LocalDate endDate1 = endDate.plusDays(1);
+        List<FriendDTO> friendships = userPage.getFriends();
+        Predicate<FriendDTO> p1 = f -> f.getDate().isAfter(startDate1);
+        Predicate<FriendDTO> p2 = f -> f.getDate().isBefore(endDate1);
+        return userPage.getFriends().stream()
+                .filter(p1.and(p2))
+                .toList();
     }
 }
 
