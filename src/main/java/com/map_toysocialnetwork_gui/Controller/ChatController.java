@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
@@ -92,6 +93,7 @@ public class ChatController extends Controller implements Observer {
         fxmlLoader.setController(sendNewMessageController);
         Parent root = fxmlLoader.load();
         newMessageStage.setScene(new Scene(root));
+        newMessageStage.getIcons().add(new Image(String.valueOf(Main.class.getResource("images/flamingo-logo-small.jpg"))));
 
         newMessageStage.show();
     }

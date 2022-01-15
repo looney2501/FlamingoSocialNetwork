@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class Main extends Application {
 
     private void initView(Stage stage) throws IOException {
         changeSceneToLogin();
+        primaryStage.getIcons().add(new Image(String.valueOf(Main.class.getResource("images/flamingo-logo-small.jpg"))));
         primaryStage.show();
     }
 
