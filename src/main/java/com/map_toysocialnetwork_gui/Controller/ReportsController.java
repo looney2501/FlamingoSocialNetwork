@@ -31,6 +31,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class ReportsController extends Controller implements Observer {
 
@@ -177,9 +178,20 @@ public class ReportsController extends Controller implements Observer {
             MessageAlert.showErrorMessage(null, "Date interval is not valid!");
         }
         else {
+            Predicate<Conversation> p1 = x -> {
+                User otherUser = x.getAllUsers().get(0);
+                if (otherUser.getId().equals(loggedUsername)) {
+                    otherUser = x.getAllUsers().get(1);
+                }
+                return service.getFriendsOfUser(loggedUsername).stream()
+                        .map(y->y.getUser())
+                        .toList()
+                        .contains(otherUser);
+            };
             List<FriendDTO> friendshipsMadeBetweenDates = service.getFriendshipsMadeBetweenDates(userPage, startDate, endDate);
             List<Conversation> friendsConversationsBetweenDates = userPage.getConversations().stream()
                     .filter(x -> x.getAllUsers().size() == 2)
+                    .filter(p1)
                     .map(c -> service.getConversationBetweenDates(c, startDate, endDate))
                     .toList();
             generateAllFriendsChatReportPDF(friendshipsMadeBetweenDates, friendsConversationsBetweenDates, startDate, endDate);
