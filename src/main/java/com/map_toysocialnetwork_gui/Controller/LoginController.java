@@ -22,7 +22,7 @@ public class LoginController extends Controller{
     private TextField passwordTextField;
 
     @FXML
-    public void handleEnterPressed(KeyEvent event) throws IOException, NoSuchAlgorithmException {
+    public void handleKeyPressed(KeyEvent event) throws IOException, NoSuchAlgorithmException {
         if (event.getCode().equals(KeyCode.ENTER)) {
             handleLoginButtonAction();
         }
