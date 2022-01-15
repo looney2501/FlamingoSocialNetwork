@@ -1,7 +1,6 @@
 package com.map_toysocialnetwork_gui;
 
 import com.map_toysocialnetwork_gui.Controller.*;
-import com.map_toysocialnetwork_gui.Domain.Page;
 import com.map_toysocialnetwork_gui.Domain.Validators.UserValidator;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.FriendshipDBRepository;
 import com.map_toysocialnetwork_gui.Repository.SQLDataBaseRepository.FriendshipRequestDBRepository;
@@ -15,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main extends Application {
 
@@ -28,6 +27,7 @@ public class Main extends Application {
     private static Service service;
     private static FXMLLoader fxmlLoader;
 
+    private static AtomicBoolean shutdownRequested = new AtomicBoolean();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -43,6 +43,16 @@ public class Main extends Application {
         primaryStage = stage;
         primaryStage.setResizable(false);
         initView(stage);
+    }
+
+    @Override
+    public void stop() throws Exception {
+        shutdownRequested.set(true);
+        super.stop();
+    }
+
+    public static boolean getShutdownRequestedState() {
+        return shutdownRequested.get();
     }
 
     private void initView(Stage stage) throws IOException {

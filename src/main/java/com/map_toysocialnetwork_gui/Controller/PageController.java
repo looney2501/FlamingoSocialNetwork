@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PageController extends Controller {
 
@@ -32,6 +33,7 @@ public class PageController extends Controller {
     private String loggedUsername;
     private Page loggedUserPage;
     private FXMLLoader fxmlLoader;
+    private AtomicBoolean shutdownRequested;
 
     @FXML
     public void handleFriendsLabelClicked() throws IOException {
@@ -83,6 +85,7 @@ public class PageController extends Controller {
 
     @FXML
     public void handleLogOutButtonAction() throws IOException {
+        shutdownRequested.set(true);
         Main.changeSceneToLogin();
     }
 
@@ -92,6 +95,21 @@ public class PageController extends Controller {
         userLastNameLabel.setText(logedUser.getLastName());
         userFirstNameLabel.setText(logedUser.getFirstName());
         initializeImageViews();
+        shutdownRequested = new AtomicBoolean();
+        Thread t1 = new Thread(new Runnable() {
+            public void run()
+            {
+                try {
+                    int x = 1;
+                    while (!Main.getShutdownRequestedState() && !shutdownRequested.get()) {
+                        Thread.sleep(10000);
+                        loggedUserPage.refreshPage();
+                        x++;
+                    }
+                } catch (InterruptedException e) {
+                }
+            }});
+        t1.start();
     }
 
     private void initializeImageViews() {
