@@ -32,30 +32,26 @@ public class LoginController extends Controller{
     public void handleLoginButtonAction() throws IOException, NoSuchAlgorithmException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        //TODO delete this
-        if (username.isEmpty() && password.isEmpty()) {
-            Main.changeSceneToPageView("mircea2501");
+        if (username.isEmpty()) {
+            MessageAlert.showErrorMessage(null, "Introduceti un nume de utilizator!");
         }
-//        if (username.isEmpty()) {
-//            MessageAlert.showErrorMessage(null, "Introduceti un nume de utilizator!");
-//        }
-//        else if (password.isEmpty()) {
-//            MessageAlert.showErrorMessage(null, "Introduceti o parola!");
-//        }
-//        else {
-//            User foundUser = service.findUser(username);
-//            if (foundUser == null) {
-//                MessageAlert.showErrorMessage(null, "Nu exista niciun utilizator cu acest username!");
-//            }
-//            else {
-//                if (!MD5Hashing.hashPassword(password).equals(foundUser.getPassword())) {
-//                    MessageAlert.showErrorMessage(null, "Parola incorecta!");
-//                }
-//                else {
-//                    Main.changeSceneToPageView(usernameTextField.getText());
-//                }
-//            }
-//        }
+        else if (password.isEmpty()) {
+            MessageAlert.showErrorMessage(null, "Introduceti o parola!");
+        }
+        else {
+            User foundUser = service.findUser(username);
+            if (foundUser == null) {
+                MessageAlert.showErrorMessage(null, "Nu exista niciun utilizator cu acest username!");
+            }
+            else {
+                if (!MD5Hashing.hashPassword(password).equals(foundUser.getPassword())) {
+                    MessageAlert.showErrorMessage(null, "Parola incorecta!");
+                }
+                else {
+                    Main.changeSceneToPageView(usernameTextField.getText());
+                }
+            }
+        }
     }
 
     public TextField getUsernameTextField() {

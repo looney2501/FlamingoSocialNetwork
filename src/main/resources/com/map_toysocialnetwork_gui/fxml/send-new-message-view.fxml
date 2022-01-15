@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox fx:id="masterPane" prefHeight="604.0" prefWidth="420.0" stylesheets="@../css/send-new-message-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="85.0" prefWidth="323.0">
@@ -27,7 +26,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="119.0" prefWidth="420.0">
          <children>
-            <TextField fx:id="messageTextField" layoutX="50.0" layoutY="23.0" prefHeight="26.0" prefWidth="246.0" />
+            <TextField fx:id="messageTextField" layoutX="50.0" layoutY="23.0" onKeyPressed="#handleKeyPressed" prefHeight="26.0" prefWidth="246.0" />
             <Button fx:id="sendNewMessageButton" layoutX="308.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleSendNewMessageAction" prefHeight="37.0" prefWidth="62.0" text="Send" />
          </children>
       </AnchorPane>

@@ -45,6 +45,7 @@ public class Page implements Observable {
         conversations = new ArrayList<>(service.getAllConversationsFor(user));
         allUsers = new ArrayList<>();
         service.getAllUsers().forEach(allUsers::add);
+        notifyObservers();
     }
 
     public User getUser() {

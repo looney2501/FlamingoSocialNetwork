@@ -19,7 +19,7 @@
       <AnchorPane prefHeight="600.0" prefWidth="600.0">
          <children>
             <ListView fx:id="listViewChat" layoutX="19.0" layoutY="39.0" prefHeight="466.0" prefWidth="562.0" />
-            <TextField fx:id="messageTextField" layoutX="19.0" layoutY="523.0" onKeyPressed="#handleEnterPressed" prefHeight="26.0" prefWidth="479.0" />
+            <TextField fx:id="messageTextField" layoutX="19.0" layoutY="523.0" onKeyPressed="#handleKeyPressed" prefHeight="26.0" prefWidth="479.0" />
             <Button layoutX="513.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleSendMessageAction" prefHeight="38.0" prefWidth="67.0" text="Send" />
          </children>
       </AnchorPane>

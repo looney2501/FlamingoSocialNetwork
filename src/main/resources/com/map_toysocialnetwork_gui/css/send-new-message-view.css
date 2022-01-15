@@ -22,7 +22,7 @@
 }
 
 .text-field {
-    -fx-background-color: #fcf1de;
+    -fx-background-color: white;
     -fx-background-insets: 0, 0 0 1 0 ;
     -fx-background-radius: 0 ;
     -fx-font-size: 16;

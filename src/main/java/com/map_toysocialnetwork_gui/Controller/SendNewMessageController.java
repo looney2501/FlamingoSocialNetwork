@@ -10,13 +10,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class SendNewMessageController extends Controller implements Observer {
+public class SendNewMessageController extends Controller {
 
     @FXML
     private ListView<FriendDTO> friendsListView;
@@ -25,6 +27,13 @@ public class SendNewMessageController extends Controller implements Observer {
     private String loggedUsername;
     private ObservableList<FriendDTO> friendsModel = FXCollections.observableArrayList();
     private Page userPage;
+
+    @FXML
+    public void handleKeyPressed(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            handleSendNewMessageAction();
+        }
+    }
 
     @FXML
     public void handleSendNewMessageAction() {
@@ -38,6 +47,7 @@ public class SendNewMessageController extends Controller implements Observer {
             try {
                 service.sendNewMessage(loggedUsername, receiversUsername, messageText, LocalDateTime.now());
                 MessageAlert.showMessage(null, Alert.AlertType.CONFIRMATION, "", "Mesaj trimis cu succes!");
+                userPage.refreshPage();
             }
             catch (ServiceException e) {
                 MessageAlert.showErrorMessage(null, e.getMessage());
@@ -102,11 +112,5 @@ public class SendNewMessageController extends Controller implements Observer {
 
     public void setUserPage(Page userPage) {
         this.userPage = userPage;
-    }
-
-
-    @Override
-    public void update() {
-
     }
 }

@@ -1,0 +1,29 @@
+.dialog-pane .button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(rgb(68, 68, 68), #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: linear-gradient(#000000, rgb(68, 68, 68));
+}
+
+.dialog-pane {
+    -fx-background-color: #fcf1de;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: #333333;
+}
+
+.dialog-pane:header .header-panel {
+    -fx-background-color: #fcf1de;
+    -fx-border-width: 0;
+}
+
+.dialog-pane:header .header-panel .label {
+    -fx-font-style: italic;
+    -fx-font-size: 2em;
+}

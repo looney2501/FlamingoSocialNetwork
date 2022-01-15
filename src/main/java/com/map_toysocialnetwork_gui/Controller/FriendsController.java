@@ -120,8 +120,6 @@ public class FriendsController extends Controller implements Observer {
             public ObservableValue<ImageView> call(TableColumn.CellDataFeatures<FriendDTO, ImageView> param) {
                 Image image = new Image(String.valueOf(Main.class.getResource("images/remove-icon.png")));
                 ImageView imageView = new ImageView(image);
-                imageView.setCursor(Cursor.HAND);
-                //TODO de ce nu merge???
                 return new SimpleObjectProperty<ImageView>(imageView);
             }
         });

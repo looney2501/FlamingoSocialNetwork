@@ -42,7 +42,7 @@ public class ChatController extends Controller implements Observer {
     private Page userPage;
 
     @FXML
-    public void handleEnterPressed(KeyEvent event) {
+    public void handleKeyPressed(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {
             handleSendMessageAction();
         }
