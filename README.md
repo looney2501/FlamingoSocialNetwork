@@ -25,3 +25,8 @@ The FlaminGO! social network gives you the possibility to interact with your fri
 - FXML
 - CSS
 - PostgreSQL
+
+<img src="https://user-images.githubusercontent.com/72696620/154143679-be47fbd4-bac7-4c58-be8b-0f8235ca528e.png" align="center" width="500px"/>
+<img src="https://user-images.githubusercontent.com/72696620/154143727-068538bc-5f95-45db-83a4-1060d0e2737f.png" align="center" width="500px"/>
+<img src="https://user-images.githubusercontent.com/72696620/154143747-137d914b-6f76-40f4-b852-d33296619904.png" align="center" width="500px"/>
+<img src="https://user-images.githubusercontent.com/72696620/154143759-356031c6-e03b-4aee-a7c8-1b00c4e50509.png" align="center" width="500px"/>
